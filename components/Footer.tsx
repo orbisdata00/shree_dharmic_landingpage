@@ -21,7 +21,7 @@ export default function Footer() {
           {LINKS.map((l) => <a key={l} href={`#${l.toLowerCase()}`}>{l}</a>)}
         </nav>
 
-        <div className="footer__social">
+       <div className="footer__social">
           <h4>Follow the Journey</h4>
           <div className="socials">
             <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" className="fill" /></svg></a>
@@ -33,8 +33,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container footer__bottom">
-        <p>© 2026 Shree Dharmic Leela. All Rights Reserved.</p>
-        <p className="footer__credits">Photographs from Wikimedia Commons, used under Creative Commons licences — see <a href="/CREDITS.md">credits</a>.</p>
+        <p>© 2026 Shree Dharmic Leela Committee. All Rights Reserved.</p>
       </div>
     </footer>
   );
