@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { prefersReducedMotion } from "./ui";
+import { useSnapCarousel } from "./useSnapCarousel";
 
 const LEELAS = [
   { title: "Krishna Leela", img: "leela-krishna.jpg", alt: "Manipuri Rasa Lila dancers portraying Krishna and the gopis", text: "The playful, loving pastimes of Shri Krishna — from Vrindavan’s Raas to the wisdom of the Gita." },
@@ -13,95 +12,7 @@ const LEELAS = [
 ];
 
 export default function LeelaCarousel() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<HTMLElement[]>([]);
-  const [active, setActive] = useState(0);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-  const [dragging, setDragging] = useState(false);
-
-  const padLeft = () => parseFloat(getComputedStyle(trackRef.current!).scrollPaddingLeft) || 0;
-
-  /** Index of the card closest to the track's left snap edge. */
-  const nearest = () => {
-    const x = trackRef.current!.scrollLeft + padLeft();
-    let best = 0, bestDist = Infinity;
-    cardRefs.current.forEach((c, i) => {
-      const d = Math.abs(c.offsetLeft - x);
-      if (d < bestDist) { bestDist = d; best = i; }
-    });
-    return best;
-  };
-
-  const goTo = useCallback((i: number) => {
-    const track = trackRef.current!;
-    const cards = cardRefs.current;
-    i = Math.max(0, Math.min(cards.length - 1, i));
-    track.scrollTo({ left: cards[i].offsetLeft - padLeft(), behavior: prefersReducedMotion() ? "auto" : "smooth" });
-  }, []);
-
-  const sync = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    // at the far end, the last card can't align left — treat it as active
-    setActive(end ? cardRefs.current.length - 1 : nearest());
-    setAtStart(track.scrollLeft <= 4);
-    setAtEnd(end);
-  }, []);
-
-  useEffect(() => {
-    const track = trackRef.current!;
-    const onScroll = () => requestAnimationFrame(sync);
-    track.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", sync);
-    sync();
-
-    // Mouse drag to scroll (touch uses native swipe)
-    let down = false, moved = false, startX = 0, startScroll = 0;
-    const onDown = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse" || e.button !== 0) return;
-      down = true; moved = false; startX = e.clientX; startScroll = track.scrollLeft;
-    };
-    const onMove = (e: PointerEvent) => {
-      if (!down) return;
-      const dx = e.clientX - startX;
-      if (!moved && Math.abs(dx) > 5) {
-        moved = true;
-        track.classList.add("is-dragging"); // applied immediately so snapping stops before React re-renders
-        setDragging(true);
-      }
-      if (moved) track.scrollLeft = startScroll - dx;
-    };
-    const onUp = () => {
-      if (!down) return;
-      down = false;
-      if (moved) {
-        track.classList.remove("is-dragging");
-        setDragging(false);
-        goTo(nearest());
-      }
-    };
-    const onDragStart = (e: DragEvent) => e.preventDefault();
-
-    track.addEventListener("pointerdown", onDown);
-    window.addEventListener("pointermove", onMove);
-    window.addEventListener("pointerup", onUp);
-    track.addEventListener("dragstart", onDragStart);
-    return () => {
-      track.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", sync);
-      track.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerup", onUp);
-      track.removeEventListener("dragstart", onDragStart);
-    };
-  }, [goTo, sync]);
-
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); goTo(active + 1); }
-    if (e.key === "ArrowLeft") { e.preventDefault(); goTo(active - 1); }
-  };
+  const { trackRef, cardRef, active, atStart, atEnd, dragging, goTo, onKeyDown } = useSnapCarousel();
 
   return (
     <section className="section leela" id="leela">
@@ -131,11 +42,7 @@ export default function LeelaCarousel() {
           onKeyDown={onKeyDown}
         >
           {LEELAS.map((l, i) => (
-            <article
-              key={l.title}
-              ref={(el) => { if (el) cardRefs.current[i] = el; }}
-              className={`l-card${i === active ? " is-active" : ""}`}
-            >
+            <article key={l.title} ref={cardRef(i)} className={`l-card${i === active ? " is-active" : ""}`}>
               <img src={`/assets/img/${l.img}`} alt={l.alt} loading="lazy" />
               <div className="l-card__body">
                 <span className="l-card__num">{String(i + 1).padStart(2, "0")}</span>

@@ -27,7 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={GOOGLE_FONTS} />
       </head>
-      <body>{children}</body>
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to <body> before
+          React hydrates; this ignores attribute differences on <body> only, not its children. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

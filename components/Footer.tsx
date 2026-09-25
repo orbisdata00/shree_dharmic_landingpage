@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer__border" aria-hidden="true"></div>
       <div className="container footer__grid">
         <div className="footer__brand">
-          <a href="#home" className="brand brand--light">
+          <a href="/#home" className="brand brand--light">
             <DiyaMark className="brand__mark" />
             <span className="brand__text">Shree <em>Dharmic</em> Leela</span>
           </a>
@@ -18,7 +18,8 @@ export default function Footer() {
 
         <nav className="footer__links" aria-label="Footer">
           <h4>Explore</h4>
-          {LINKS.map((l) => <a key={l} href={`#${l.toLowerCase()}`}>{l}</a>)}
+          {LINKS.map((l) => <a key={l} href={`/#${l.toLowerCase()}`}>{l}</a>)}
+          <a href="/membership">Membership</a>
         </nav>
 
        <div className="footer__social">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { DiyaMark } from "./ui";
 
@@ -12,10 +13,11 @@ const LINKS = [
   { id: "contact", label: "Contact" },
 ];
 
-export default function Navbar() {
+/** `solid`: always use the light, scrolled style (for pages without a dark hero). */
+export default function Navbar({ solid = false }: { solid?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState(solid ? "" : "home");
 
   // Solid background once the page scrolls
   useEffect(() => {
@@ -54,26 +56,26 @@ export default function Navbar() {
   }, []);
 
   const close = () => setOpen(false);
-  const cls = ["nav", scrolled && "is-scrolled", open && "is-open"].filter(Boolean).join(" ");
+  const cls = ["nav", (scrolled || solid) && "is-scrolled", open && "is-open"].filter(Boolean).join(" ");
 
   return (
     <header className={cls} id="nav">
       <div className="nav__inner container">
-        <a href="#home" className="brand" aria-label="Shree Dharmic Leela — home">
+        <a href="/#home" className="brand" aria-label="Shree Dharmic Leela — home">
           <DiyaMark className="brand__mark" />
           <span className="brand__text">Shree <em>Dharmic</em> Leela</span>
         </a>
 
         <nav className="nav__links" id="navLinks" aria-label="Primary">
           {LINKS.map(({ id, label }) => (
-            <a key={id} href={`#${id}`} className={active === id ? "is-active" : undefined} onClick={close}>
+            <a key={id} href={`/#${id}`} className={active === id ? "is-active" : undefined} onClick={close}>
               {label}
             </a>
           ))}
-          <a href="#community" className="btn btn--primary nav__cta-mobile" onClick={close}>Join Us</a>
+          <Link href="/membership" className="btn btn--primary nav__cta-mobile" onClick={close}>Apply Membership</Link>
         </nav>
 
-        <a href="#community" className="btn btn--primary btn--sm nav__cta">Join Us</a>
+        <Link href="/membership" className="btn btn--primary btn--sm nav__cta">Apply Membership</Link>
 
         <button
           className="nav__toggle"
