@@ -11,7 +11,7 @@ export default function Community() {
           <h2 className="h2">Be Part of the <em>Journey</em></h2>
           <p>Join a community that celebrates Dharma, devotion, culture, and the timeless stories that connect generations.</p>
           <div className="community__actions">
-            <a href="#contact" className="btn btn--primary">Join Our Community</a>
+            <a href="/membership" className="btn btn--primary">Join Our Community</a>
             <a href="#contact" className="btn btn--glass">Contact Us</a>
           </div>
         </div>

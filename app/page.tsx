@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Celebrate from "@/components/Celebrate";
 import LeelaCarousel from "@/components/LeelaCarousel";
 import Experience from "@/components/Experience";
+import Streaming from "@/components/Streaming";
 import Events from "@/components/Events";
 import Gallery from "@/components/Gallery";
 import Quote from "@/components/Quote";
@@ -23,6 +24,7 @@ export default function Home() {
         <Celebrate />
         <LeelaCarousel />
         <Experience />
+        <Streaming />
         <Events />
         <Gallery />
         <Quote />
