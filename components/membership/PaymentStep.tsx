@@ -44,7 +44,10 @@ export default function PaymentStep({ registration, token, fee, onActivated, onE
   const pollTimer = useRef<number | undefined>(undefined);
   const mounted = useRef(true);
 
-  useEffect(() => () => { mounted.current = false; window.clearTimeout(pollTimer.current); }, []);
+  useEffect(() => {
+    mounted.current = true; // StrictMode re-runs effects after a cleanup, so reset here
+    return () => { mounted.current = false; window.clearTimeout(pollTimer.current); };
+  }, []);
 
   /**
    * Decide what to show from a backend payment status. Returns true when settled (nothing to poll for).
