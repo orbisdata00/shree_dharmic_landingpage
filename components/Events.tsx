@@ -2,7 +2,7 @@ import { delay } from "./ui";
 
 const EVENTS = [
   {
-    title: "Dharmic Cultural Evening",
+    title: "Dharmic Leela Cultural Evening",
     date: "2026-10-11", day: "11", month: "Oct",
     place: "Open-Air Amphitheatre · 6:30 PM",
     text: "An evening of classical dance, devotional music and stories celebrating our shared heritage.",
@@ -12,7 +12,7 @@ const EVENTS = [
     title: "Divine Storytelling & Bhakti Sandhya",
     date: "2026-10-20", day: "20", month: "Oct",
     place: "Riverside Ghat · 5:45 PM",
-    text: "Katha, bhajan and Sandhya aarti by the river as the sun sets — a gathering for the whole family.",
+    text: "Katha, bhajan and Sandhya aarti by the river as the sun sets - a gathering for the whole family.",
     img: "event-sandhya.jpg", alt: "Priests performing an evening aarti with tall brass lamps by the river",
   },
   {
@@ -30,8 +30,8 @@ export default function Events() {
     <section className="section events" id="events">
       <div className="container">
         <header className="section-head reveal">
-          <p className="eyebrow">Mark Your Calendar</p>
-          <h2 className="h2">Upcoming Spiritual &amp; <em>Cultural Events</em></h2>
+          <p className="eyebrow">Upcoming Events</p>
+          <h2 className="h2">Join Us at the <em>Leela</em></h2>
           <div className="ornament" aria-hidden="true"></div>
         </header>
 

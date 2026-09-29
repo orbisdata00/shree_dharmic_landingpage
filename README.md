@@ -1,6 +1,6 @@
-# Shree Dharmic Leela — Landing Page
+# Shri Dharmic Leela Committee - Website
 
-A landing page for **Shree Dharmic Leela**, a spiritual and cultural community that brings Dharmic stories, traditions and celebrations to life. It uses a soft saffron, warm yellow and cream palette, real photographs of Indian devotional life, and calm animations.
+The website of the **Shri Dharmic Leela Committee (Regd.) Delhi**, which celebrates the tradition of Leela and the values of dharma, devotion, maryada, truth and community. It follows the committee's brand guidelines: an ivory-first design with deep-red headings, orange buttons and restrained gold accents, Cinzel and Inter typefaces, and the committee's primary and heritage logos.
 
 Built with **Next.js 16** (App Router), **React 19** and **TypeScript**.
 
@@ -23,19 +23,19 @@ Open http://localhost:3000.
 
 ## Page sections
 
-1. **Navbar:** sticky, turns translucent on scroll, highlights the current section, and has a full-screen menu on mobile.
-2. **Hero:** Ganga Aarti background with a slow zoom, floating light particles and a rotating mandala.
+The order follows the brand guidelines. The navigation is Home • About • Leela • Events • Gallery • Committee • Updates • Volunteer • Contact.
+
+1. **Navbar:** primary logo, sticky, turns translucent on scroll, highlights the current section, and has a full-screen menu below 1240px.
+2. **Hero:** blessings line and the brand line "Tradition that brings generations together", over a slow-zooming background with light particles.
 3. **About:** arch-framed image with parallax and three highlight cards.
-4. **What We Celebrate:** four image cards that zoom on hover.
-5. **The Divine Leela:** horizontal carousel with arrows, dots, keyboard control, mouse drag and swipe.
-6. **Experience:** split screen with animated diyas.
-7. **Streaming Now:** carousel of YouTube video cards; clicking one plays it in a popup player.
-8. **Events:** three event cards with date badges.
-9. **Gallery:** masonry grid with a full-screen lightbox (keyboard, swipe, focus trap).
-10. **Quote:** centred quote over a mandala background.
-11. **Community:** call to action on a glass card over a parallax image.
-12. **Newsletter:** email sign-up form.
-13. **Footer:** links, social icons and photo credits.
+4. **Leela:** horizontal carousel with arrows, dots, keyboard control, mouse drag and swipe.
+5. **Events:** three event cards with date badges.
+6. **Gallery:** masonry grid with a full-screen lightbox (keyboard, swipe, focus trap).
+7. **Heritage (`#committee`):** maroon section with the heritage logo, the five brand values (Dharma, Bhakti, Seva, Sanskriti, Parampara) and the brand line.
+8. **Updates:** carousel of YouTube video cards; clicking one plays it in a popup player.
+9. **Community (`#volunteer`):** volunteer and membership call to action.
+10. **Contact:** email sign-up form.
+11. **Footer:** logo, brand line, blessings, links and social icons.
 
 The page works from phone to desktop width and respects the **reduce motion** accessibility setting.
 
@@ -48,14 +48,17 @@ app/
   globals.css      All styles (colours, typography, layout, animations)
   icon.svg         Diya favicon
 components/
-  Navbar.tsx  Hero.tsx  About.tsx  Celebrate.tsx  LeelaCarousel.tsx
-  Experience.tsx  Events.tsx  Gallery.tsx  Quote.tsx  Community.tsx
-  Streaming.tsx  Newsletter.tsx  Footer.tsx
+  Navbar.tsx  Hero.tsx  About.tsx  LeelaCarousel.tsx  Events.tsx
+  Gallery.tsx  Heritage.tsx  Streaming.tsx  Community.tsx
+  Newsletter.tsx  Footer.tsx
   useSnapCarousel.ts Shared carousel logic (Leela + Streaming)
   HeroParticles.tsx  Floating hero particles
   ScrollEffects.tsx  Scroll reveal and parallax for the whole page
   ui.tsx             Shared pieces: diya icon, mandala artwork, helpers
+lib/
+  brand.ts         Committee name, blessings line, brand line and logo paths
 public/
+  assets/brand/    Primary and heritage logos (from the brand guidelines)
   assets/img/      Photographs (resized and compressed)
   CREDITS.md       Photo credits and licences
 ```
@@ -76,7 +79,8 @@ public/
 
 ## Implementation notes
 
-- **Fonts** (Cormorant Garamond, Poppins, Tiro Devanagari Hindi) load from the Google Fonts stylesheet in `app/layout.tsx`. `next/font` isn't used because under Turbopack it inserts an Arial fallback that changes characters Poppins doesn't have, such as "→".
+- **Brand tokens:** the guideline colours are CSS variables at the top of `globals.css` (`--brand-orange`, `--brand-red`, `--brand-maroon`, `--brand-gold`, `--brand-ivory`, `--text`). A few derived shades (`--orange-deep`, `--gold-text`) are used where the exact brand colour is too light for readable text on ivory.
+- **Fonts** (Cinzel, Inter, Noto Serif Devanagari) load from the Google Fonts stylesheet in `app/layout.tsx`. Cinzel has no italic, so highlighted words in headings are shown in colour instead. `next/font` isn't used because under Turbopack it inserts an Arial fallback ahead of the brand fonts.
 - **Frosted-glass blur:** in `globals.css`, keep `-webkit-backdrop-filter` *before* `backdrop-filter`. If the order is reversed, Next's CSS minifier drops the standard property and Chrome shows no blur.
 - **Plain `<img>` tags** are used instead of `next/image`, because `next/image` changes the markup that the masonry and card layouts rely on.
 - **YouTube embeds** use `youtube-nocookie.com` (YouTube's privacy-enhanced mode), and the player only loads after a visitor clicks a video, so the page stays fast. Closing the popup removes the player, which stops playback.
@@ -88,4 +92,4 @@ All photographs are from [Wikimedia Commons](https://commons.wikimedia.org) and 
 
 ## Licence
 
-© 2026 Shree Dharmic Leela. All rights reserved. The photographs remain under their individual licences listed in `public/CREDITS.md`.
+© 2026 Shri Dharmic Leela Committee (Regd.) Delhi. All rights reserved. The photographs remain under their individual licences listed in `public/CREDITS.md`.

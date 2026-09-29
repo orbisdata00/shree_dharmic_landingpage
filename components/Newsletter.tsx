@@ -2,6 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { DiyaMark, Mandala } from "./ui";
+import { BRAND } from "@/lib/brand";
 
 export default function Newsletter() {
   const [msg, setMsg] = useState("");
@@ -16,7 +17,7 @@ export default function Newsletter() {
       input.focus();
       return;
     }
-    setMsg("🪔 Dhanyavaad! You’re now connected with Shree Dharmic Leela.");
+    setMsg(`🪔 Dhanyavaad! You’re now connected with the ${BRAND.name}.`);
     e.currentTarget.reset();
   };
 
@@ -25,8 +26,9 @@ export default function Newsletter() {
       <Mandala className="newsletter__mandala" />
       <div className="container newsletter__inner reveal">
         <DiyaMark className="newsletter__diya" />
-        <h2 className="h2">Stay Connected With <em>Shree Dharmic Leela</em></h2>
-        <p>Be the first to know about upcoming Leelas, spiritual gatherings, cultural events, and celebrations.</p>
+        <p className="eyebrow">Contact</p>
+        <h2 className="h2">Stay Connected With the <em>Committee</em></h2>
+        <p>Be the first to hear about upcoming Leela, events, volunteer opportunities and committee updates.</p>
         <form className="newsletter__form" id="newsletterForm" noValidate onSubmit={onSubmit}>
           <label className="visually-hidden" htmlFor="email">Email address</label>
           <input ref={inputRef} id="email" name="email" type="email" placeholder="Enter your email" autoComplete="email" required />

@@ -1,4 +1,5 @@
 import { DiyaMark, Mandala } from "./ui";
+import { BRAND } from "@/lib/brand";
 
 const HIGHLIGHTS = [
   {
@@ -37,10 +38,10 @@ export default function About() {
         </div>
 
         <div className="about__content">
-          <p className="eyebrow reveal">About Shree Dharmic Leela</p>
-          <h2 className="h2 reveal">A Journey Through<br /><em>Faith, Culture &amp; Tradition</em></h2>
+          <p className="eyebrow reveal">About the Committee</p>
+          <h2 className="h2 reveal">A Living Tradition<br />of <em>Faith &amp; Maryada</em></h2>
           <div className="ornament reveal" aria-hidden="true"></div>
-          <p className="lead reveal">Shree Dharmic Leela brings timeless stories, spiritual traditions, and cultural expressions to life through devotion, creativity, and meaningful experiences.</p>
+          <p className="lead reveal">The {BRAND.name} celebrates the timeless tradition of Leela and the values of dharma, devotion, maryada, truth and community - welcoming every generation to take part.</p>
 
           <ul className="highlights">
             {HIGHLIGHTS.map((h) => (
@@ -51,7 +52,7 @@ export default function About() {
             ))}
           </ul>
 
-          <a href="#leela" className="btn btn--outline reveal">Explore Our Story <span className="arrow">→</span></a>
+          <a href="#committee" className="btn btn--outline reveal">Our Heritage <span className="arrow">→</span></a>
         </div>
       </div>
     </section>

@@ -12,12 +12,12 @@ import { prefersReducedMotion } from "./ui";
  */
 const VIDEOS = [
   { id: "pobGhdQc09Y", tag: "Aarti", title: "Ganga Aarti at Dashashwamedh Ghat, Varanasi", channel: "Harish Bali Travels" },
-  { id: "5-Xoh7jKVo8", tag: "Bhajan", title: "Achyutam Keshavam — Krishna Bhajan by Alka Yagnik", channel: "Zee Music Devotional" },
-  { id: "-SPi601NQpk", tag: "Leela", title: "Ramlila — the traditional theatrical retelling of the Ramayana", channel: "Sangeet Natak Akademi" },
-  { id: "S980-z1qx3g", tag: "Stotram", title: "Shiv Tandav Stotram — Shankar Mahadevan", channel: "Times Music Spiritual" },
-  { id: "AETFvQonfV8", tag: "Chalisa", title: "Shree Hanuman Chalisa — Hariharan", channel: "T-Series Bhakti Sagar" },
+  { id: "5-Xoh7jKVo8", tag: "Bhajan", title: "Achyutam Keshavam - Krishna Bhajan by Alka Yagnik", channel: "Zee Music Devotional" },
+  { id: "-SPi601NQpk", tag: "Leela", title: "Ramlila - the traditional theatrical retelling of the Ramayana", channel: "Sangeet Natak Akademi" },
+  { id: "S980-z1qx3g", tag: "Stotram", title: "Shiv Tandav Stotram - Shankar Mahadevan", channel: "Times Music Spiritual" },
+  { id: "AETFvQonfV8", tag: "Chalisa", title: "Shree Hanuman Chalisa - Hariharan", channel: "T-Series Bhakti Sagar" },
   { id: "_4WmgIyg6rY", tag: "Classical Art", title: "Eye Dancing and India’s Ancient Art of Kathakali", channel: "Great Big Story" },
-  { id: "v6vhzmhKfM4", tag: "Aarti", title: "Har Har Gange — Ganga Aarti at Assi Ghat", channel: "Root Stories" },
+  { id: "v6vhzmhKfM4", tag: "Aarti", title: "Har Har Gange - Ganga Aarti at Assi Ghat", channel: "Root Stories" },
 ];
 type Video = (typeof VIDEOS)[number];
 
@@ -30,13 +30,13 @@ export default function Streaming() {
   const play = (v: Video) => { if (!wasDragged()) setPlaying(v); };
 
   return (
-    <section className="section stream" id="streaming">
+    <section className="section stream" id="updates">
       <div className="stream__glow" aria-hidden="true"></div>
       <div className="container stream__head">
         <header className="section-head section-head--left reveal">
-          <p className="eyebrow"><span className="stream__dot" aria-hidden="true"></span>Watch · Listen · Experience</p>
-          <h2 className="h2">Streaming <em>Now</em></h2>
-          <p className="lead">Aarti, bhajans, Leela and classical arts — sacred moments from across Bharat, ready to watch whenever your heart calls.</p>
+          <p className="eyebrow"><span className="stream__dot" aria-hidden="true"></span>Updates · Watch &amp; Listen</p>
+          <h2 className="h2">Latest <em>Updates</em></h2>
+          <p className="lead">Aarti, bhajans, Leela and classical arts - sacred moments from across Bharat, ready to watch whenever your heart calls.</p>
         </header>
         <div className="carousel__controls reveal">
           <button className="carousel__btn" aria-label="Previous video" disabled={atStart} onClick={() => goTo(active - 1)}>

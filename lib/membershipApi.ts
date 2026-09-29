@@ -1,5 +1,5 @@
 /**
- * Client for the Shree Dharmic Leela membership backend (/api/v1).
+ * Client for the Shri Dharmic Leela Committee membership backend (/api/v1).
  * See backend-shree-dharmic/docs/API.md for the full contract.
  *
  * The browser calls the API directly (not through a Next.js proxy): the backend rate-limits

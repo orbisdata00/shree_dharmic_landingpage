@@ -158,7 +158,7 @@ export default function PaymentStep({ registration, token, fee, onActivated, onE
       </dl>
 
       {phase.kind === "idle" && phase.lastFailed && (
-        <p className="form-error" role="alert">Your last payment attempt didn&apos;t go through. No membership was activated — you can try again.</p>
+        <p className="form-error" role="alert">Your last payment attempt didn&apos;t go through. No membership was activated - you can try again.</p>
       )}
       {phase.kind === "failed" && (
         <p className="form-error" role="alert">{phase.message} Please try again.</p>
@@ -179,7 +179,7 @@ export default function PaymentStep({ registration, token, fee, onActivated, onE
         <div className="status-box status-box--info" role="status">
           <div>
             <strong>We&apos;re still confirming your payment</strong>
-            <span>If money was deducted, your membership will be activated automatically once Razorpay confirms it — you don&apos;t need to pay again. You can check back any time.</span>
+            <span>If money was deducted, your membership will be activated automatically once Razorpay confirms it - you don&apos;t need to pay again. You can check back any time.</span>
           </div>
           <button type="button" className="btn btn--outline btn--sm" onClick={() => { setPhase({ kind: "pending", reason: null }); poll(); }}>Check again</button>
         </div>
@@ -196,7 +196,7 @@ export default function PaymentStep({ registration, token, fee, onActivated, onE
 
       <p className="secure-note">
         <LockIcon /> Payments are processed by Razorpay. We never see or store your card or bank details.
-        {testMode && <span className="badge badge--test">Test mode — no real money is charged</span>}
+        {testMode && <span className="badge badge--test">Test mode - no real money is charged</span>}
       </p>
     </div>
   );

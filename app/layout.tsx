@@ -1,22 +1,23 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { BRAND } from "@/lib/brand";
 
-// Fonts are loaded from Google Fonts exactly as in the original static site (same stylesheet and
-// unicode-range subsets). next/font is intentionally not used: under Turbopack it always inserts
-// a metric-adjusted Arial fallback ahead of the CSS stack, which changes glyphs Poppins lacks (e.g. "→").
+// Brand typefaces (per the brand guidelines): Cinzel headings, Inter body, Noto Serif Devanagari
+// for Hindi. Loaded from Google Fonts; next/font is intentionally not used: under Turbopack it
+// always inserts a metric-adjusted Arial fallback ahead of the CSS stack, which changes glyphs.
 const GOOGLE_FONTS =
-  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap";
+  "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap";
 
 export const metadata: Metadata = {
-  title: "Shree Dharmic Leela — Experience the Divine",
+  title: `${BRAND.name} - ${BRAND.line.replace(/\.$/, "")}`,
   description:
-    "Shree Dharmic Leela brings timeless stories, spiritual traditions, and cultural expressions to life through devotion, creativity, and meaningful experiences.",
+    `${BRAND.name} ${BRAND.place} celebrates the timeless tradition of Leela and the values of dharma, devotion, maryada, truth and community. ${BRAND.blessing}.`,
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FFF7ED",
+  themeColor: "#FFF9EE",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
