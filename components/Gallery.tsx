@@ -8,7 +8,7 @@ const IMAGES = [
   { img: "g-diyas.jpg", alt: "Rows of lit clay diyas glowing on Diwali night", caption: "Diyas of Deepavali" },
   { img: "g-meenakshi.jpg", alt: "The gopuram and temple tank of Meenakshi Amman Temple, Madurai", caption: "Meenakshi Temple, Madurai" },
   { img: "g-marigold.jpg", alt: "Close-up of vivid orange marigold garlands", caption: "Marigold offerings" },
-  { img: "g-kathakali.jpg", alt: "A Kathakali artist having his green face paint applied", caption: "Kathakali — the art of transformation" },
+  { img: "g-kathakali.jpg", alt: "A Kathakali artist having his green face paint applied", caption: "Kathakali - the art of transformation" },
   { img: "g-aarti.jpg", alt: "A lone priest raising a flaming lamp during aarti at night", caption: "Evening aarti" },
   { img: "g-raas.jpg", alt: "Devotees in yellow and saffron attire at a Raas Leela festival", caption: "Raas Leela festival" },
   { img: "g-lamp.jpg", alt: "An ornate brass oil lamp hanging in a temple", caption: "Temple lamp" },

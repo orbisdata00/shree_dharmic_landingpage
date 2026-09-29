@@ -41,7 +41,7 @@ export function useSnapCarousel() {
     const track = trackRef.current;
     if (!track) return;
     const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    // at the far end, the last card can't align left — treat it as active
+    // at the far end, the last card can't align left - treat it as active
     setActive(end ? cardRefs.current.length - 1 : nearest());
     setAtStart(track.scrollLeft <= 4);
     setAtEnd(end);

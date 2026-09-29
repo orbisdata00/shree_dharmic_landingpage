@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { DiyaMark } from "./ui";
+import { BRAND } from "@/lib/brand";
 
 const LINKS = [
   { id: "home", label: "Home" },
@@ -10,6 +10,9 @@ const LINKS = [
   { id: "leela", label: "Leela" },
   { id: "events", label: "Events" },
   { id: "gallery", label: "Gallery" },
+  { id: "committee", label: "Committee" },
+  { id: "updates", label: "Updates" },
+  { id: "volunteer", label: "Volunteer" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -32,7 +35,7 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
     document.body.style.overflow = open ? "hidden" : "";
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const mq = window.matchMedia("(min-width: 981px)");
+    const mq = window.matchMedia("(min-width: 1241px)");
     const onMq = (e: MediaQueryListEvent) => e.matches && setOpen(false);
     document.addEventListener("keydown", onKey);
     mq.addEventListener("change", onMq);
@@ -61,9 +64,9 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
   return (
     <header className={cls} id="nav">
       <div className="nav__inner container">
-        <a href="/#home" className="brand" aria-label="Shree Dharmic Leela — home">
-          <DiyaMark className="brand__mark" />
-          <span className="brand__text">Shree <em>Dharmic</em> Leela</span>
+        <a href="/#home" className="brand" aria-label={`${BRAND.name} - home`}>
+          <img className="brand__logo" src={BRAND.logo} alt="" width={52} height={52} />
+          <span className="brand__text">{BRAND.short}<small>Committee</small></span>
         </a>
 
         <nav className="nav__links" id="navLinks" aria-label="Primary">

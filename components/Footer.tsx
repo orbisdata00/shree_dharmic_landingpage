@@ -1,6 +1,6 @@
-import { DiyaMark } from "./ui";
+import { BRAND } from "@/lib/brand";
 
-const LINKS = ["Home", "About", "Leela", "Events", "Gallery", "Contact"];
+const LINKS = ["Home", "About", "Leela", "Events", "Gallery", "Committee", "Updates", "Volunteer", "Contact"];
 
 export default function Footer() {
   return (
@@ -8,11 +8,12 @@ export default function Footer() {
       <div className="footer__border" aria-hidden="true"></div>
       <div className="container footer__grid">
         <div className="footer__brand">
-          <a href="/#home" className="brand brand--light">
-            <DiyaMark className="brand__mark" />
-            <span className="brand__text">Shree <em>Dharmic</em> Leela</span>
+          <a href="/#home" className="brand brand--light" aria-label={`${BRAND.name} - home`}>
+            <img className="footer__logo" src={BRAND.logo} alt="" width={96} height={96} loading="lazy" />
+            <span className="brand__text">{BRAND.short}<small>Committee {BRAND.place}</small></span>
           </a>
-          <p>Celebrating Dharma, Culture &amp; Divine Stories.</p>
+          <p className="footer__line">“{BRAND.line}”</p>
+          <p className="footer__blessing">{BRAND.blessing}</p>
           <p className="footer__sanskrit">॥ धर्मो रक्षति रक्षितः ॥</p>
         </div>
 
@@ -34,7 +35,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container footer__bottom">
-        <p>© 2026 Shree Dharmic Leela Committee. All Rights Reserved.</p>
+        <p>© {new Date().getFullYear()} {BRAND.name} {BRAND.place}. All Rights Reserved.</p>
       </div>
     </footer>
   );

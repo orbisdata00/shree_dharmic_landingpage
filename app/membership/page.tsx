@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MembershipPortal from "@/components/membership/MembershipPortal";
+import { BRAND } from "@/lib/brand";
 import "./membership.css";
 
 export const metadata: Metadata = {
-  title: "Apply for Membership — Shree Dharmic Leela",
+  title: `Apply for Membership - ${BRAND.name}`,
   description:
-    "Become a member of Shree Dharmic Leela: register, verify your mobile number, pay the membership fee securely and receive your membership ID, receipt and membership letter.",
+    `Become a member of the ${BRAND.name}: register, verify your mobile number, pay the membership fee securely and receive your membership ID, receipt and membership letter.`,
 };
 
 export default function MembershipPage() {
@@ -22,7 +23,7 @@ export default function MembershipPage() {
           <div className="container mship-hero__content">
             <p className="hero__label">॥ सदस्यता ॥</p>
             <h1>Become a <span>Member</span></h1>
-            <p>Join the Shree Dharmic Leela family and help keep our traditions, stories and celebrations alive for generations to come.</p>
+            <p>Join the {BRAND.name} family and help keep our traditions, stories and celebrations alive for generations to come.</p>
           </div>
         </section>
 

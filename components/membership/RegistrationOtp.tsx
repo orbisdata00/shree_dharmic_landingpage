@@ -32,7 +32,7 @@ export default function RegistrationOtp({ registration, token, onVerified, onCha
     } catch (err) {
       if (onAuthError(err)) return;
       if (err instanceof ApiError && err.code === "OTP_COOLDOWN") {
-        // A code was sent moments ago (e.g. on a previous visit) — it's still valid.
+        // A code was sent moments ago (e.g. on a previous visit) - it's still valid.
         setInfo("A code was sent recently. Enter it below, or wait to request a new one.");
         countdown.start(err.retryAfterSeconds ?? 60);
       } else if (err instanceof ApiError && err.code === "OTP_NOT_REQUESTED") {

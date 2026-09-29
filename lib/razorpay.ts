@@ -62,7 +62,7 @@ export async function openCheckout(order: PaymentOrder): Promise<CheckoutOutcome
       description: order.description,
       prefill: order.prefill,
       notes: order.notes,
-      theme: { color: "#D97706" },
+      theme: { color: "#F26A21" }, // brand Sacred Orange
       handler: (response) => resolve({ kind: "completed", response }),
       modal: {
         confirm_close: true,

@@ -198,7 +198,7 @@ export default function MembershipPortal() {
         <div className="fee-card">
           <span className="fee-card__label">Membership fee</span>
           <strong className="fee-card__amount">
-            {fee ? formatINR(fee.amount_paise) : feeError ? "—" : <span className="skeleton" />}
+            {fee ? formatINR(fee.amount_paise) : feeError ? "-" : <span className="skeleton" />}
           </strong>
           <span className="fee-card__note">Paid securely online via Razorpay</span>
         </div>

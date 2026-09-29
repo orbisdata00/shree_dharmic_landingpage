@@ -1,13 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Celebrate from "@/components/Celebrate";
 import LeelaCarousel from "@/components/LeelaCarousel";
-import Experience from "@/components/Experience";
 import Streaming from "@/components/Streaming";
 import Events from "@/components/Events";
 import Gallery from "@/components/Gallery";
-import Quote from "@/components/Quote";
+import Heritage from "@/components/Heritage";
 import Community from "@/components/Community";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
@@ -20,14 +18,14 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        {/* Order follows the brand guidelines: Hero & blessings → About → Leela → Events →
+            Gallery → Heritage (Committee) → Updates → Community (Volunteer) → Contact */}
         <About />
-        <Celebrate />
         <LeelaCarousel />
-        <Experience />
-        <Streaming />
         <Events />
         <Gallery />
-        <Quote />
+        <Heritage />
+        <Streaming />
         <Community />
         <Newsletter />
       </main>
