@@ -1,0 +1,61 @@
+/* Blog & newsletters (/blog, /blog/[slug]). Uses the brand tokens from globals.css. */
+
+.blog { background: var(--brand-ivory); }
+
+/* ---------- Hero ---------- */
+.blog-hero { position: relative; overflow: hidden; isolation: isolate; padding: 170px 0 120px; color: #fff; }
+.blog-hero__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+.blog-hero__overlay {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, rgba(64, 12, 12, .9) 0%, rgba(110, 22, 22, .7) 50%, rgba(242, 106, 33, .3) 100%);
+}
+.blog-hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); color: var(--brand-ivory); line-height: 1.12; max-width: 22ch; overflow-wrap: anywhere; }
+.blog-hero h1 span { color: var(--gold-pale); }
+.blog-hero .container > p:last-child { margin-top: 18px; max-width: 60ch; font-size: 1.08rem; font-weight: 300; color: rgba(255, 249, 238, .9); }
+.blog-hero--post { padding-bottom: 100px; }
+.blog-hero--post h1 { font-size: clamp(1.9rem, 4.4vw, 3.2rem); margin-top: 14px; }
+
+/* ---------- Body ---------- */
+.blog-body { padding: clamp(40px, 6vw, 72px) 0 var(--section-y); }
+
+.blog-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.blog-tabs a {
+  padding: 9px 20px; border-radius: 999px; border: 1px solid var(--gold-soft); background: #fff;
+  color: var(--text-soft); font-weight: 500; font-size: .92rem; transition: background .2s var(--ease), color .2s var(--ease);
+}
+.blog-tabs a:hover { color: var(--brand-red); border-color: var(--brand-gold); }
+.blog-tabs a.is-active { background: var(--brand-red); border-color: var(--brand-red); color: var(--brand-ivory); }
+
+.blog-empty { padding: 48px 0; text-align: center; color: var(--text-soft); }
+
+.blog-pager { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 44px; color: var(--text-soft); font-size: .92rem; }
+
+/* ---------- Article ---------- */
+.blog-article {
+  max-width: 72ch; margin: 0 auto; font-size: 1.08rem; line-height: 1.8; color: var(--text); overflow-wrap: anywhere;
+}
+.blog-article > * + * { margin-top: 1.1em; }
+.blog-article h2, .blog-article h3, .blog-article h4 { color: var(--brand-red); line-height: 1.3; margin-top: 1.8em; }
+.blog-article h2 { font-size: 1.7rem; }
+.blog-article h3 { font-size: 1.35rem; }
+.blog-article a { color: var(--orange-deep); text-decoration: underline; text-underline-offset: 3px; }
+.blog-article ul, .blog-article ol { padding-left: 1.4em; }
+.blog-article ul { list-style: disc; }
+.blog-article ol { list-style: decimal; }
+.blog-article li::marker { color: var(--brand-gold); }
+.blog-article li + li { margin-top: .4em; }
+.blog-article blockquote { border-left: 3px solid var(--brand-gold); padding: .2em 0 .2em 1.1em; color: var(--text-soft); font-style: italic; }
+.blog-article img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
+.blog-article figcaption { font-size: .88rem; color: var(--text-soft); text-align: center; margin-top: .5em; }
+.blog-article hr { border: 0; border-top: 1px solid var(--line); margin: 2em 0; }
+.blog-article pre { overflow-x: auto; padding: 1em; background: var(--ivory-deep); border-radius: var(--radius-sm); font-size: .9em; }
+.blog-article table { display: block; overflow-x: auto; border-collapse: collapse; }
+.blog-article th, .blog-article td { border: 1px solid var(--line); padding: .5em .8em; text-align: left; }
+/* Same font-size as .blog-article so 72ch lines up with the article column. */
+.blog-back { max-width: 72ch; margin: 48px auto 0; font-size: 1.08rem; }
+
+@media (max-width: 720px) {
+  .blog-hero { padding: 130px 0 90px; }
+  .blog-hero--post { padding-bottom: 70px; }
+  .blog-pager { flex-wrap: wrap; justify-content: center; }
+}

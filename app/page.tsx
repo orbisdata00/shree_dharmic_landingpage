@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import LeelaCarousel from "@/components/LeelaCarousel";
 import Streaming from "@/components/Streaming";
+import LatestPosts from "@/components/LatestPosts";
 import Events from "@/components/Events";
 import Gallery from "@/components/Gallery";
 import Heritage from "@/components/Heritage";
@@ -10,6 +11,10 @@ import Community from "@/components/Community";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import ScrollEffects from "@/components/ScrollEffects";
+import "./post-card.css";
+
+// Re-render at most once a minute so newly published blog posts appear on the home page.
+export const revalidate = 60;
 
 export default function Home() {
   return (
@@ -19,13 +24,14 @@ export default function Home() {
       <main id="main">
         <Hero />
         {/* Order follows the brand guidelines: Hero & blessings → About → Leela → Events →
-            Gallery → Heritage (Committee) → Updates → Community (Volunteer) → Contact */}
+            Gallery → Heritage (Committee) → Updates → Blog → Community (Volunteer) → Contact */}
         <About />
         <LeelaCarousel />
         <Events />
         <Gallery />
         <Heritage />
         <Streaming />
+        <LatestPosts />
         <Community />
         <Newsletter />
       </main>

@@ -6,9 +6,6 @@ import {
   type Registration, type RegistrationInput, type Session,
 } from "@/lib/membershipApi";
 
-// Wording recorded by the backend with the consent (settings key `whatsapp_consent_text`, default value).
-const WHATSAPP_CONSENT_TEXT = "I agree to receive my membership receipt and letter on WhatsApp.";
-
 type Props =
   | { mode: "create"; onCreated: (r: Registration, s: Session) => void; onRecover: (mobile: string) => void }
   | {
@@ -46,7 +43,6 @@ export default function DetailsForm(props: Props) {
     : { full_name: "", mobile: "", email: "" };
 
   const [values, setValues] = useState<Fields>(initial);
-  const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Partial<Fields>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [existsFor, setExistsFor] = useState<string | null>(null);
@@ -69,7 +65,7 @@ export default function DetailsForm(props: Props) {
     try {
       if (props.mode === "create") {
         const input: RegistrationInput = {
-          full_name: values.full_name.trim(), mobile: values.mobile.trim(), email: values.email.trim(), whatsapp_consent: consent,
+          full_name: values.full_name.trim(), mobile: values.mobile.trim(), email: values.email.trim(),
         };
         const res = await api.register(input);
         props.onCreated(res.registration, res.session);
@@ -124,7 +120,7 @@ export default function DetailsForm(props: Props) {
           maxLength={120} placeholder="e.g. Asha Sharma" aria-invalid={!!errors.full_name} aria-describedby={errors.full_name ? "full_name-error" : undefined} />
       </Field>
 
-      <Field id="mobile" label="Mobile number" error={errors.mobile} hint="We'll send a verification code to this number.">
+      <Field id="mobile" label="Mobile number" error={errors.mobile} hint="We'll send a verification code here, and your receipt and membership letter on WhatsApp.">
         <div className="input-prefix">
           <span aria-hidden="true">+91</span>
           <input id="mobile" name="mobile" type="tel" inputMode="tel" autoComplete="tel-national" value={values.mobile} onChange={set("mobile")}
@@ -136,14 +132,6 @@ export default function DetailsForm(props: Props) {
         <input id="email" name="email" type="email" inputMode="email" autoComplete="email" value={values.email} onChange={set("email")}
           maxLength={254} placeholder="you@example.com" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : "email-hint"} />
       </Field>
-
-      {!editing && (
-        <label className="check">
-          <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-          <span className="check__box" aria-hidden="true" />
-          <span>{WHATSAPP_CONSENT_TEXT} <em>(optional)</em></span>
-        </label>
-      )}
 
       <div className="step-actions">
         {editing && <button type="button" className="btn btn--outline" onClick={props.onCancel} disabled={busy}>Cancel</button>}

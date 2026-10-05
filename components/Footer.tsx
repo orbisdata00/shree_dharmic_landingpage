@@ -20,6 +20,7 @@ export default function Footer() {
         <nav className="footer__links" aria-label="Footer">
           <h4>Explore</h4>
           {LINKS.map((l) => <a key={l} href={`/#${l.toLowerCase()}`}>{l}</a>)}
+          <a href="/blog">Blog</a>
           <a href="/membership">Membership</a>
         </nav>
 

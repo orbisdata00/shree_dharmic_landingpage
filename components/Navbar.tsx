@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BRAND } from "@/lib/brand";
 
-const LINKS = [
+// Section links scroll to an id on the home page; `page` links go to their own route.
+const LINKS: { id: string; label: string; page?: string }[] = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "leela", label: "Leela" },
@@ -12,6 +14,7 @@ const LINKS = [
   { id: "gallery", label: "Gallery" },
   { id: "committee", label: "Committee" },
   { id: "updates", label: "Updates" },
+  { id: "blog", label: "Blog", page: "/blog" },
   { id: "volunteer", label: "Volunteer" },
   { id: "contact", label: "Contact" },
 ];
@@ -21,6 +24,7 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(solid ? "" : "home");
+  const pathname = usePathname();
 
   // Solid background once the page scrolls
   useEffect(() => {
@@ -51,7 +55,8 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
       (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id)),
       { rootMargin: "-45% 0px -50% 0px" }
     );
-    LINKS.forEach(({ id }) => {
+    LINKS.forEach(({ id, page }) => {
+      if (page) return;
       const el = document.getElementById(id);
       if (el) spy.observe(el);
     });
@@ -70,11 +75,17 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
         </a>
 
         <nav className="nav__links" id="navLinks" aria-label="Primary">
-          {LINKS.map(({ id, label }) => (
-            <a key={id} href={`/#${id}`} className={active === id ? "is-active" : undefined} onClick={close}>
-              {label}
-            </a>
-          ))}
+          {LINKS.map(({ id, label, page }) =>
+            page ? (
+              <Link key={id} href={page} className={pathname.startsWith(page) ? "is-active" : undefined} onClick={close}>
+                {label}
+              </Link>
+            ) : (
+              <a key={id} href={`/#${id}`} className={active === id ? "is-active" : undefined} onClick={close}>
+                {label}
+              </a>
+            ),
+          )}
           <Link href="/membership" className="btn btn--primary nav__cta-mobile" onClick={close}>Apply Membership</Link>
         </nav>
 
