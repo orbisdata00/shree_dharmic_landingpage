@@ -23,21 +23,24 @@ Open http://localhost:3000.
 
 ## Page sections
 
-The order follows the brand guidelines. The navigation is Home • About • Leela • Events • Gallery • Committee • Updates • Volunteer • Contact.
+The order follows the brand guidelines. The navigation is Home • About • Leela • Events • Bhumi Poojan • Committee • Updates • Volunteer • Contact.
 
 1. **Navbar:** primary logo, sticky, turns translucent on scroll, highlights the current section, and has a full-screen menu below 1240px.
 2. **Hero:** blessings line and the brand line "Tradition that brings generations together", over a slow-zooming background with light particles.
 3. **About:** arch-framed image with parallax and three highlight cards.
 4. **Leela:** horizontal carousel with arrows, dots, keyboard control, mouse drag and swipe.
 5. **Events:** three event cards with date badges.
-6. **Gallery:** masonry grid with a full-screen lightbox (keyboard, swipe, focus trap).
-7. **Heritage (`#committee`):** maroon section with the heritage logo, the five brand values (Dharma, Bhakti, Seva, Sanskriti, Parampara) and the brand line.
-8. **Updates:** carousel of YouTube video cards; clicking one plays it in a popup player.
-9. **Community (`#volunteer`):** volunteer and membership call to action.
-10. **Contact:** email sign-up form.
-11. **Footer:** logo, brand line, blessings, links and social icons.
+6. **Heritage (`#committee`):** maroon section with the heritage logo, the five brand values (Dharma, Bhakti, Seva, Sanskriti, Parampara) and the brand line.
+7. **Updates:** carousel of YouTube video cards; clicking one plays it in a popup player.
+8. **Community (`#volunteer`):** volunteer and membership call to action.
+9. **Contact:** email sign-up form.
+10. **Footer:** logo, brand line, blessings, links and social icons.
 
 The page works from phone to desktop width and respects the **reduce motion** accessibility setting.
+
+## Bhumi Poojan page (`/bhumi-poojan`)
+
+A separate page with a photo grid and full-screen viewer for the Bhumi Poojan ceremony. Photos go in `public/assets/img/bhumi-poojan/` and are listed, in display order with their pixel sizes, in `lib/bhumi-poojan-photos.json`. Until photos are added, the page shows "Photos coming soon".
 
 ## Project structure
 
@@ -49,7 +52,7 @@ app/
   icon.svg         Diya favicon
 components/
   Navbar.tsx  Hero.tsx  About.tsx  LeelaCarousel.tsx  Events.tsx
-  Gallery.tsx  Heritage.tsx  Streaming.tsx  Community.tsx
+  Gallery.tsx (reusable photo grid + lightbox)  Heritage.tsx  Streaming.tsx  Community.tsx
   Newsletter.tsx  Footer.tsx
   useSnapCarousel.ts Shared carousel logic (Leela + Streaming)
   HeroParticles.tsx  Floating hero particles

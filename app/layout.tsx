@@ -9,6 +9,8 @@ const GOOGLE_FONTS =
   "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap";
 
 export const metadata: Metadata = {
+  // Makes relative canonical / Open Graph URLs absolute (link previews on social media need them).
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: `${BRAND.name} - ${BRAND.line.replace(/\.$/, "")}`,
   description:
     `${BRAND.name} ${BRAND.place} celebrates the timeless tradition of Leela and the values of dharma, devotion, maryada, truth and community. ${BRAND.blessing}.`,

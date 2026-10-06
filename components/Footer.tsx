@@ -1,6 +1,6 @@
 import { BRAND } from "@/lib/brand";
 
-const LINKS = ["Home", "About", "Leela", "Events", "Gallery", "Committee", "Updates", "Volunteer", "Contact"];
+const LINKS = ["Home", "About", "Leela", "Events", "Committee", "Updates", "Volunteer", "Contact"];
 
 export default function Footer() {
   return (
@@ -20,6 +20,8 @@ export default function Footer() {
         <nav className="footer__links" aria-label="Footer">
           <h4>Explore</h4>
           {LINKS.map((l) => <a key={l} href={`/#${l.toLowerCase()}`}>{l}</a>)}
+          <a href="/bhumi-poojan">Bhumi Poojan</a>
+          <a href="/blog">Blog</a>
           <a href="/membership">Membership</a>
         </nav>
 

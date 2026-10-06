@@ -4,24 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { prefersReducedMotion } from "./ui";
 
-const IMAGES = [
-  { img: "g-diyas.jpg", alt: "Rows of lit clay diyas glowing on Diwali night", caption: "Diyas of Deepavali" },
-  { img: "g-meenakshi.jpg", alt: "The gopuram and temple tank of Meenakshi Amman Temple, Madurai", caption: "Meenakshi Temple, Madurai" },
-  { img: "g-marigold.jpg", alt: "Close-up of vivid orange marigold garlands", caption: "Marigold offerings" },
-  { img: "g-kathakali.jpg", alt: "A Kathakali artist having his green face paint applied", caption: "Kathakali - the art of transformation" },
-  { img: "g-aarti.jpg", alt: "A lone priest raising a flaming lamp during aarti at night", caption: "Evening aarti" },
-  { img: "g-raas.jpg", alt: "Devotees in yellow and saffron attire at a Raas Leela festival", caption: "Raas Leela festival" },
-  { img: "g-lamp.jpg", alt: "An ornate brass oil lamp hanging in a temple", caption: "Temple lamp" },
-  { img: "g-hampi.jpg", alt: "The stone chariot temple complex of Vittala Temple, Hampi, reflected in water", caption: "Vittala Temple, Hampi" },
-  { img: "g-rangoli.jpg", alt: "A rangoli made of glowing lamps and petals", caption: "The rangoli of lights" },
-  { img: "g-chhath.jpg", alt: "Ghats illuminated with lamps along the water during Chhath Puja", caption: "Chhath Puja on the ghats" },
-  { img: "g-krishna-float.jpg", alt: "Children dressed as Radha, Krishna and the gopis on a festival float", caption: "Krishna Leela tableau" },
-  { img: "g-diya-bokeh.jpg", alt: "A single diya flame against warm bokeh lights", caption: "A single flame" },
-  { img: "g-rangoli-diyas.jpg", alt: "Diyas placed around a rangoli on a polished floor", caption: "Rangoli & diyas" },
-];
-const wrap = (i: number) => (i + IMAGES.length) % IMAGES.length;
+export type GalleryImage = {
+  /** Path under /public, e.g. "/assets/img/bhumi-poojan/bp-01.jpg" */
+  src: string;
+  /** Smaller version shown in the grid; the full `src` is loaded only in the viewer */
+  thumb?: string;
+  alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+};
 
-export default function Gallery() {
+/** Masonry photo grid with a full-screen lightbox (keyboard, swipe, focus trap). */
+export default function Gallery({ images, label = "image" }: { images: GalleryImage[]; label?: string }) {
+  const wrap = (i: number) => (i + images.length) % images.length;
   const [index, setIndex] = useState(0);        // target image
   const [shown, setShown] = useState<number | null>(null); // image currently displayed in the lightbox
   const [hidden, setHidden] = useState(true);
@@ -93,36 +89,26 @@ export default function Gallery() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const current = shown === null ? null : IMAGES[shown];
+  const current = shown === null ? null : images[shown];
 
   return (
     <>
-      <section className="section gallery" id="gallery">
-        <div className="container">
-          <header className="section-head reveal">
-            <p className="eyebrow">Gallery</p>
-            <h2 className="h2">Moments of <em>Light &amp; Devotion</em></h2>
-            <div className="ornament" aria-hidden="true"></div>
-          </header>
-
-          <div className="masonry" id="gallery-grid">
-            {IMAGES.map((g, i) => (
-              <figure
-                key={g.img}
-                className="m-item reveal"
-                tabIndex={0}
-                role="button"
-                aria-label={`View image: ${g.caption}`}
-                onClick={() => open(i)}
-                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); } }}
-              >
-                <img src={`/assets/img/${g.img}`} alt={g.alt} loading="lazy" />
-                <figcaption>{g.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="masonry">
+        {images.map((g, i) => (
+          <figure
+            key={g.src}
+            className="m-item"
+            tabIndex={0}
+            role="button"
+            aria-label={`View ${g.caption ?? `${label} ${i + 1} of ${images.length}`}`}
+            onClick={() => open(i)}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); } }}
+          >
+            <img src={g.thumb ?? g.src} alt={g.alt} width={g.width} height={g.height} loading="lazy" decoding="async" />
+            {g.caption && <figcaption>{g.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
 
       {mounted && createPortal(
         <div
@@ -148,9 +134,12 @@ export default function Gallery() {
           </button>
           <figure className="lightbox__figure">
             {current && (
-              <img src={`/assets/img/${current.img}`} alt={current.alt} className={swapping ? "is-swapping" : undefined} />
+              <img src={current.src} alt={current.alt} className={swapping ? "is-swapping" : undefined} />
             )}
-            <figcaption>{current?.caption}</figcaption>
+            <figcaption>
+              {current?.caption}
+              {shown !== null && <span className="lightbox__count">{shown + 1} / {images.length}</span>}
+            </figcaption>
           </figure>
           <button className="lightbox__nav lightbox__nav--next" aria-label="Next image" onClick={() => show(index + 1, true)}>
             <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
