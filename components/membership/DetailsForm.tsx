@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import {
-  ApiError, api, friendlyError,
+  ApiError, api, friendlyError, isValidMobile, mobileDigits,
   type Registration, type RegistrationInput, type Session,
 } from "@/lib/membershipApi";
 
@@ -24,17 +24,16 @@ function validate(v: Fields): Partial<Fields> {
   else if (!/\p{L}/u.test(name)) e.full_name = "Full name must contain letters.";
   else if (/[<>{}[\]\\=@#$%^*|~`]/.test(name)) e.full_name = "Full name contains unsupported characters.";
 
-  const digits = v.mobile.replace(/[\s()-]/g, "");
-  if (!digits) e.mobile = "Please enter your mobile number.";
-  else if (!/^(\+|00)?\d{10,15}$/.test(digits)) e.mobile = "Please enter a valid 10-digit mobile number.";
+  if (!v.mobile) e.mobile = "Please enter your mobile number.";
+  else if (!isValidMobile(v.mobile)) e.mobile = "Please enter a valid 10-digit mobile number.";
 
   if (!v.email.trim()) e.email = "Please enter your email address.";
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.email = "Please enter a valid email address.";
   return e;
 }
 
-/** "+919876543210" → "98765 43210" for editing */
-const localMobile = (e164: string) => e164.replace(/^\+91(\d{5})(\d{5})$/, "$1 $2");
+/** "+919876543210" → "9876543210" for editing */
+const localMobile = (e164: string) => e164.replace(/^\+91(\d{10})$/, "$1");
 
 export default function DetailsForm(props: Props) {
   const editing = props.mode === "edit";
@@ -49,7 +48,8 @@ export default function DetailsForm(props: Props) {
   const [busy, setBusy] = useState(false);
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((v) => ({ ...v, [k]: e.target.value }));
+    const value = k === "mobile" ? mobileDigits(e.target.value) : e.target.value;
+    setValues((v) => ({ ...v, [k]: value }));
     if (errors[k]) setErrors((x) => ({ ...x, [k]: undefined }));
   };
 
@@ -73,7 +73,7 @@ export default function DetailsForm(props: Props) {
         // Send only what changed; changing the mobile number resets verification on the server.
         const changes: Partial<RegistrationInput> = {};
         if (values.full_name.trim() !== props.registration.full_name) changes.full_name = values.full_name.trim();
-        if (values.mobile.replace(/\s/g, "") !== localMobile(props.registration.mobile).replace(/\s/g, "")) changes.mobile = values.mobile.trim();
+        if (values.mobile !== localMobile(props.registration.mobile)) changes.mobile = values.mobile.trim();
         if (values.email.trim().toLowerCase() !== props.registration.email) changes.email = values.email.trim();
         if (!Object.keys(changes).length) { props.onCancel(); return; }
         props.onUpdated(await api.updateMe(props.token, changes));
@@ -123,8 +123,8 @@ export default function DetailsForm(props: Props) {
       <Field id="mobile" label="Mobile number" error={errors.mobile} hint="We'll send a verification code here, and your receipt and membership letter on WhatsApp.">
         <div className="input-prefix">
           <span aria-hidden="true">+91</span>
-          <input id="mobile" name="mobile" type="tel" inputMode="tel" autoComplete="tel-national" value={values.mobile} onChange={set("mobile")}
-            maxLength={20} placeholder="98765 43210" aria-invalid={!!errors.mobile} aria-describedby={errors.mobile ? "mobile-error" : "mobile-hint"} />
+          <input id="mobile" name="mobile" type="tel" inputMode="numeric" autoComplete="tel-national" value={values.mobile} onChange={set("mobile")}
+            maxLength={10} placeholder="9876543210" aria-invalid={!!errors.mobile} aria-describedby={errors.mobile ? "mobile-error" : "mobile-hint"} />
         </div>
       </Field>
 
