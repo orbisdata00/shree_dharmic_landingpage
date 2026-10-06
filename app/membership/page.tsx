@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MembershipPortal from "@/components/membership/MembershipPortal";
-import { BRAND } from "@/lib/brand";
+import { redirect } from "next/navigation";
+import { BRAND, MEMBERSHIP_OPEN } from "@/lib/brand";
 import "./membership.css";
 
 export const metadata: Metadata = {
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function MembershipPage() {
+  if (!MEMBERSHIP_OPEN) redirect("/");
+
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>

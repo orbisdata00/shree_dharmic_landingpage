@@ -1,3 +1,5 @@
+import { MEMBERSHIP_OPEN } from "@/lib/brand";
+
 export default function Community() {
   return (
     <section className="community" id="volunteer">
@@ -12,7 +14,7 @@ export default function Community() {
           <p>Every Leela is made possible by seva. Lend your hands on stage, backstage or among the audience - or become a member and help carry this tradition to the next generation.</p>
           <div className="community__actions">
             <a href="#contact" className="btn btn--primary">Volunteer With Us</a>
-            <a href="/membership" className="btn btn--glass">Become a Member</a>
+            {MEMBERSHIP_OPEN && <a href="/membership" className="btn btn--glass">Become a Member</a>}
           </div>
         </div>
       </div>

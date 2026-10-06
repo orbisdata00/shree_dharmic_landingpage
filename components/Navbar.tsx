@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BRAND } from "@/lib/brand";
+import { BRAND, MEMBERSHIP_OPEN } from "@/lib/brand";
 
 // Section links scroll to an id on the home page; `page` links go to their own route.
 const LINKS: { id: string; label: string; page?: string }[] = [
@@ -39,7 +39,7 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
     document.body.style.overflow = open ? "hidden" : "";
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const mq = window.matchMedia("(min-width: 1241px)");
+    const mq = window.matchMedia("(min-width: 1361px)");
     const onMq = (e: MediaQueryListEvent) => e.matches && setOpen(false);
     document.addEventListener("keydown", onKey);
     mq.addEventListener("change", onMq);
@@ -86,10 +86,12 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
               </a>
             ),
           )}
-          <Link href="/membership" className="btn btn--primary nav__cta-mobile" onClick={close}>Apply Membership</Link>
+          {MEMBERSHIP_OPEN && (
+            <Link href="/membership" className="btn btn--primary nav__cta-mobile" onClick={close}>Apply Membership</Link>
+          )}
         </nav>
 
-        <Link href="/membership" className="btn btn--primary btn--sm nav__cta">Apply Membership</Link>
+        {MEMBERSHIP_OPEN && <Link href="/membership" className="btn btn--primary btn--sm nav__cta">Apply Membership</Link>}
 
         <button
           className="nav__toggle"
