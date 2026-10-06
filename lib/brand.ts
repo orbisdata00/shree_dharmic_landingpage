@@ -13,4 +13,4 @@ export const BRAND = {
 } as const;
 
 /** Membership sign-ups are paused: hides every "Apply Membership" link and sends /membership to the home page. Set to true to reopen. */
-export const MEMBERSHIP_OPEN = false;
+export const MEMBERSHIP_OPEN = true;

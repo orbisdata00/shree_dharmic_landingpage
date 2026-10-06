@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ApiError, api, friendlyError, type Registration, type Session } from "@/lib/membershipApi";
+import { ApiError, api, friendlyError, isValidMobile, mobileDigits, type Registration, type Session } from "@/lib/membershipApi";
 import OtpForm, { useCountdown } from "./OtpForm";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 /** Resume an application (or regain access to documents) on any device, via an SMS code. */
 export default function RecoveryFlow({ initialMobile = "", onRecovered, onCancel }: Props) {
-  const [mobile, setMobile] = useState(initialMobile);
+  const [mobile, setMobile] = useState(() => mobileDigits(initialMobile));
   const [challenge, setChallenge] = useState<string | null>(null);
   const [devOtp, setDevOtp] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
@@ -45,7 +45,7 @@ export default function RecoveryFlow({ initialMobile = "", onRecovered, onCancel
 
   const onSubmitMobile = (e: FormEvent) => {
     e.preventDefault();
-    if (!/^(\+|00)?\d{10,15}$/.test(mobile.replace(/[\s()-]/g, ""))) { setError("Please enter a valid 10-digit mobile number."); return; }
+    if (!isValidMobile(mobile)) { setError("Please enter a valid 10-digit mobile number."); return; }
     request();
   };
 
@@ -63,7 +63,7 @@ export default function RecoveryFlow({ initialMobile = "", onRecovered, onCancel
   if (challenge) {
     return (
       <OtpForm
-        destination={mobile.trim()}
+        destination={`+91 ${mobile}`}
         onVerify={verify}
         onResend={request}
         resendIn={countdown.left}
@@ -87,8 +87,8 @@ export default function RecoveryFlow({ initialMobile = "", onRecovered, onCancel
         <label htmlFor="recover-mobile">Mobile number</label>
         <div className="input-prefix">
           <span aria-hidden="true">+91</span>
-          <input id="recover-mobile" type="tel" inputMode="tel" autoComplete="tel-national" value={mobile}
-            onChange={(e) => { setMobile(e.target.value); setError(null); }} maxLength={20} placeholder="98765 43210"
+          <input id="recover-mobile" type="tel" inputMode="numeric" autoComplete="tel-national" value={mobile}
+            onChange={(e) => { setMobile(mobileDigits(e.target.value)); setError(null); }} maxLength={10} placeholder="9876543210"
             aria-invalid={!!error} aria-describedby={error ? "recover-mobile-error" : undefined} autoFocus />
         </div>
         {error && <p className="field__error" id="recover-mobile-error" role="alert">{error}</p>}

@@ -734,7 +734,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .nav__toggle { display: flex; }
   .nav__cta { display: none; }
   .nav__links {
-    position: fixed; inset: 0; z-index: 1; flex-direction: column; justify-content: center; gap: 2px;
+    position: fixed; inset: 0; z-index: 1; flex-direction: column; gap: 2px;
     padding: 90px 24px 32px; overflow-y: auto;
     background: rgba(255, 249, 238, .97); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
     opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility .45s;
@@ -744,12 +744,18 @@ ul { list-style: none; margin: 0; padding: 0; }
     background: radial-gradient(circle at 50% 110%, rgba(201, 154, 46, .6), transparent 50%);
   }
   .nav__links a:not(.btn) {
-    font-family: var(--font-display); font-size: clamp(1.35rem, 4.2vh, 1.9rem); font-weight: 700; color: var(--brand-red) !important;
-    padding: 6px 14px; opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease);
+    font-family: var(--font-display); font-size: clamp(1.1rem, 3.3vh, 1.7rem); font-weight: 700; color: var(--brand-red) !important;
+    padding: 4px 14px; opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease);
   }
   .nav__links a:not(.btn)::after { bottom: 50%; left: -8px; transform: translateY(50%) scale(0); }
   .nav__links a.is-active::after { transform: translateY(50%) scale(1); }
   .nav__cta-mobile { display: inline-flex; margin-top: 18px; opacity: 0; transition: opacity .5s var(--ease) .35s; }
+  /* Auto margins centre the links but, unlike justify-content: center, keep the top ones reachable when the list scrolls. */
+  .nav__links > :first-child { margin-top: auto; }
+  .nav__links > :last-child { margin-bottom: auto; }
+  /* The scrolled bar's backdrop-filter would make it the containing block of the fixed menu,
+     shrinking the menu to the bar's height (solid pages, or after scrolling). */
+  .nav.is-open { -webkit-backdrop-filter: none; backdrop-filter: none; }
   .nav.is-open .nav__links { opacity: 1; visibility: visible; }
   .nav.is-open .nav__links a { opacity: 1; transform: none; }
   .nav.is-open .nav__links a:nth-child(2) { transition-delay: .04s; }

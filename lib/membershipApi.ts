@@ -306,6 +306,16 @@ export const formatDate = (iso: string) =>
   new Intl.DateTimeFormat("en-IN", { dateStyle: "long", timeZone: "Asia/Kolkata" }).format(new Date(iso));
 
 /** "+919876543210" → "+91 98765 43210" */
+/**
+ * Keeps a typed or pasted mobile number to the 10 national digits shown after the fixed +91:
+ * drops anything that isn't a digit, a leading 91 or 0 on a pasted full number, and extra digits.
+ */
+export const mobileDigits = (raw: string) =>
+  raw.replace(/\D/g, "").replace(/^(?:91|0)(?=\d{10}$)/, "").slice(0, 10);
+
+/** Indian mobile numbers: 10 digits starting with 6-9. */
+export const isValidMobile = (digits: string) => /^[6-9]\d{9}$/.test(digits);
+
 export const formatMobile = (e164: string) => {
   const m = e164.match(/^\+91(\d{5})(\d{5})$/);
   return m ? `+91 ${m[1]} ${m[2]}` : e164;
