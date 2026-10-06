@@ -3,13 +3,11 @@
  * content API (backend-shree-dharmic: GET /api/v1/content, GET /api/v1/content/{slug}).
  * Only published, already-live posts are returned; `body_html` is sanitised by the backend.
  *
- * Responses are cached for REVALIDATE_SECONDS, so a newly published post appears on the
- * site within a minute.
+ * The site is a static export, so these run only during `next build`: a newly published post
+ * appears on the site after the next build.
  */
 
 import { API_BASE } from "./membershipApi";
-
-const REVALIDATE_SECONDS = 60;
 
 export type ContentType = "blog" | "newsletter";
 
@@ -35,7 +33,7 @@ export class ContentUnavailable extends Error {}
 async function getJson<T>(path: string): Promise<T | null> {
   let res: Response;
   try {
-    res = await fetch(`${API_BASE}/api/v1${path}`, { next: { revalidate: REVALIDATE_SECONDS } });
+    res = await fetch(`${API_BASE}/api/v1${path}`);
   } catch {
     throw new ContentUnavailable("The content service could not be reached.");
   }
@@ -48,6 +46,16 @@ export async function listPosts({ type, page = 1, pageSize = 9 }: { type?: Conte
   const q = new URLSearchParams({ page: String(page), page_size: String(pageSize) });
   if (type) q.set("content_type", type);
   return (await getJson<PostPage>(`/content?${q}`)) ?? { items: [], meta: { page, page_size: pageSize, total: 0, total_pages: 0 } };
+}
+
+/** Every published post, newest first (walks all pages of the list endpoint). */
+export async function listAllPosts(): Promise<PostSummary[]> {
+  const first = await listPosts({ page: 1, pageSize: 50 });
+  const items = [...first.items];
+  for (let page = 2; page <= first.meta.total_pages; page++) {
+    items.push(...(await listPosts({ page, pageSize: 50 })).items);
+  }
+  return items;
 }
 
 export async function getPost(slug: string): Promise<Post | null> {

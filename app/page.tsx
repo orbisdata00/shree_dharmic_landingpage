@@ -14,9 +14,6 @@ import ScrollEffects from "@/components/ScrollEffects";
 import "./post-card.css";
 import "./bhumi-preview.css";
 
-// Re-render at most once a minute so newly published blog posts appear on the home page.
-export const revalidate = 60;
-
 export default function Home() {
   return (
     <>

@@ -18,8 +18,19 @@ Open http://localhost:3000.
 | Command         | What it does                         |
 | --------------- | ------------------------------------ |
 | `npm run dev`   | Start the development server         |
-| `npm run build` | Create an optimised production build |
-| `npm start`     | Serve the production build           |
+| `npm run build` | Build the static site into `out/`    |
+
+## Deploying (nginx, static files)
+
+The site is a static export: `npm run build` writes plain HTML/CSS/JS to `out/`, and nginx serves that folder. No Node process runs on the server.
+
+```nginx
+root /opt/install/shree_dharmic_landingpage/out;
+location / { try_files $uri $uri/ $uri.html =404; }
+error_page 404 /404.html;
+```
+
+Blog posts are fetched from the backend **during the build**, so the backend must be reachable and `.env` must hold the real `NEXT_PUBLIC_MEMBERSHIP_API_URL` and `NEXT_PUBLIC_SITE_URL`. A newly published post appears on the site after the next `npm run build`.
 
 ## Page sections
 

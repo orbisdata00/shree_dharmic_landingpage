@@ -4,9 +4,23 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BRAND } from "@/lib/brand";
-import { TYPE_LABEL, formatPostDate, getPost } from "@/lib/contentApi";
+import { ContentUnavailable, TYPE_LABEL, formatPostDate, getPost, listAllPosts } from "@/lib/contentApi";
 import "../../post-card.css";
 import "../blog.css";
+
+// Static export: one page per post published at build time; other slugs are 404s until the next build.
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  let slugs: string[] = [];
+  try {
+    slugs = (await listAllPosts()).map((p) => p.slug);
+  } catch (e) {
+    if (!(e instanceof ContentUnavailable)) throw e;
+  }
+  // Static export refuses an empty list; "_none" fails getPost's slug check, so it renders as a 404.
+  return (slugs.length ? slugs : ["_none"]).map((slug) => ({ slug }));
+}
 
 // Social networks build link previews from these tags when the post is shared (e.g. by the Zapier automation).
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
