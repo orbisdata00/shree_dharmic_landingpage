@@ -19,12 +19,13 @@
 .blog-body { padding: clamp(40px, 6vw, 72px) 0 var(--section-y); }
 
 .blog-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
-.blog-tabs a {
+.blog-tabs button {
+  cursor: pointer; font: inherit;
   padding: 9px 20px; border-radius: 999px; border: 1px solid var(--gold-soft); background: #fff;
   color: var(--text-soft); font-weight: 500; font-size: .92rem; transition: background .2s var(--ease), color .2s var(--ease);
 }
-.blog-tabs a:hover { color: var(--brand-red); border-color: var(--brand-gold); }
-.blog-tabs a.is-active { background: var(--brand-red); border-color: var(--brand-red); color: var(--brand-ivory); }
+.blog-tabs button:hover { color: var(--brand-red); border-color: var(--brand-gold); }
+.blog-tabs button.is-active { background: var(--brand-red); border-color: var(--brand-red); color: var(--brand-ivory); }
 
 .blog-empty { padding: 48px 0; text-align: center; color: var(--text-soft); }
 
