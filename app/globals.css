@@ -188,6 +188,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .nav__links a:not(.btn):hover, .nav__links a.is-active { color: #fff; }
 .nav__links a:not(.btn):hover::after, .nav__links a.is-active::after { transform: translateX(-50%) scale(1); }
+.nav__cta { flex-shrink: 0; }
 .nav__cta-mobile { display: none; }
 
 .nav.is-scrolled {
@@ -727,9 +728,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   .value:nth-child(4) { grid-column: 2 / span 2; }
 }
 
-/* Mobile nav: nine links + CTA need the full desktop width, so the menu collapses early.
+/* Mobile nav: ten links + CTA need the full desktop width, so the menu collapses early.
    Keep in sync with the matchMedia query in components/Navbar.tsx. */
-@media (max-width: 1240px) {
+@media (max-width: 1360px) {
   .nav__toggle { display: flex; }
   .nav__cta { display: none; }
   .nav__links {
@@ -759,6 +760,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   .nav.is-open .nav__links a:nth-child(7) { transition-delay: .24s; }
   .nav.is-open .nav__links a:nth-child(8) { transition-delay: .28s; }
   .nav.is-open .nav__links a:nth-child(9) { transition-delay: .32s; }
+  .nav.is-open .nav__links a:nth-child(10) { transition-delay: .36s; }
+  .nav.is-open .nav__links a:nth-child(11) { transition-delay: .4s; }
   .nav.is-open .brand { position: relative; z-index: 2; }
   .nav.is-open .brand__text { color: var(--brand-red); }
   .nav.is-open .brand__text small { color: var(--gold-text); }

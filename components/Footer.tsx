@@ -1,4 +1,4 @@
-import { BRAND } from "@/lib/brand";
+import { BRAND, MEMBERSHIP_OPEN } from "@/lib/brand";
 
 const LINKS = ["Home", "About", "Leela", "Events", "Committee", "Updates", "Volunteer", "Contact"];
 
@@ -22,7 +22,7 @@ export default function Footer() {
           {LINKS.map((l) => <a key={l} href={`/#${l.toLowerCase()}`}>{l}</a>)}
           <a href="/bhumi-poojan">Bhumi Poojan</a>
           <a href="/blog">Blog</a>
-          <a href="/membership">Membership</a>
+          {MEMBERSHIP_OPEN && <a href="/membership">Membership</a>}
         </nav>
 
        <div className="footer__social">

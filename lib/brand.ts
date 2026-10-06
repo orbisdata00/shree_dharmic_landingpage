@@ -11,3 +11,6 @@ export const BRAND = {
   logo: "/assets/brand/logo-primary.webp",
   heritageLogo: "/assets/brand/logo-heritage.webp",
 } as const;
+
+/** Membership sign-ups are paused: hides every "Apply Membership" link and sends /membership to the home page. Set to true to reopen. */
+export const MEMBERSHIP_OPEN = false;

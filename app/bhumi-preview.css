@@ -1,0 +1,25 @@
+/* Home page Bhumi Poojan teaser (components/BhumiPoojanPreview.tsx). */
+
+.bp-preview__grid {
+  display: grid; gap: 14px;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, clamp(150px, 18vw, 230px));
+}
+.bp-preview__item { position: relative; margin: 0; overflow: hidden; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); }
+.bp-preview__item:first-child { grid-row: span 2; border-radius: var(--radius); }
+.bp-preview__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.bp-preview__grid:hover .bp-preview__item img { transform: scale(1.04); }
+.bp-preview__more {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: rgba(64, 12, 12, .62); color: var(--brand-ivory);
+  font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: .02em;
+}
+.bp-preview__grid:focus-visible { outline: 2px solid var(--brand-red); outline-offset: 6px; border-radius: var(--radius); }
+
+@media (max-width: 720px) {
+  .bp-preview__grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px repeat(2, 130px); gap: 10px; }
+  .bp-preview__item:first-child { grid-column: span 2; grid-row: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bp-preview__item img { transition: none; }
+}
