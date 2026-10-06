@@ -1,0 +1,17 @@
+/* Bhumi Poojan photo page (/bhumi-poojan). Grid and lightbox styles come from globals.css. */
+
+.bp-hero { position: relative; overflow: hidden; isolation: isolate; padding: 170px 0 120px; color: #fff; }
+.bp-hero__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+.bp-hero__overlay {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, rgba(64, 12, 12, .9) 0%, rgba(110, 22, 22, .7) 50%, rgba(242, 106, 33, .3) 100%);
+}
+.bp-hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); color: var(--brand-ivory); line-height: 1.12; }
+.bp-hero h1 span { color: var(--gold-pale); }
+.bp-hero .container > p:last-child { margin-top: 18px; max-width: 60ch; font-size: 1.08rem; font-weight: 300; color: rgba(255, 249, 238, .9); }
+
+.bp-body { padding: clamp(40px, 6vw, 72px) 0 var(--section-y); }
+.bp-body .m-item img { height: auto; }
+.bp-empty { padding: 48px 0; text-align: center; color: var(--text-soft); }
+
+.lightbox__count { display: block; margin-top: 6px; font-family: var(--font-body, inherit); font-size: .9rem; font-weight: 400; color: rgba(255, 249, 238, .75); }

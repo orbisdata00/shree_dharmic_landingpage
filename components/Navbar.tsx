@@ -11,7 +11,7 @@ const LINKS: { id: string; label: string; page?: string }[] = [
   { id: "about", label: "About" },
   { id: "leela", label: "Leela" },
   { id: "events", label: "Events" },
-  { id: "gallery", label: "Gallery" },
+  { id: "bhumi-poojan", label: "Bhumi Poojan", page: "/bhumi-poojan" },
   { id: "committee", label: "Committee" },
   { id: "updates", label: "Updates" },
   { id: "blog", label: "Blog", page: "/blog" },

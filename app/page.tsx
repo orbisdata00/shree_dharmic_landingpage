@@ -5,7 +5,6 @@ import LeelaCarousel from "@/components/LeelaCarousel";
 import Streaming from "@/components/Streaming";
 import LatestPosts from "@/components/LatestPosts";
 import Events from "@/components/Events";
-import Gallery from "@/components/Gallery";
 import Heritage from "@/components/Heritage";
 import Community from "@/components/Community";
 import Newsletter from "@/components/Newsletter";
@@ -24,11 +23,10 @@ export default function Home() {
       <main id="main">
         <Hero />
         {/* Order follows the brand guidelines: Hero & blessings → About → Leela → Events →
-            Gallery → Heritage (Committee) → Updates → Blog → Community (Volunteer) → Contact */}
+            Heritage (Committee) → Updates → Blog → Community (Volunteer) → Contact */}
         <About />
         <LeelaCarousel />
         <Events />
-        <Gallery />
         <Heritage />
         <Streaming />
         <LatestPosts />
