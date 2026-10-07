@@ -133,13 +133,13 @@ export class ApiError extends Error {
 /** Thrown when the API can't be reached at all (offline, server down, CORS rejected). */
 export class NetworkError extends Error {
   constructor() {
-    super("We couldn't reach the membership server. Please check your connection and try again.");
+    super("We couldn't reach our server. Please check your connection and try again.");
   }
 }
 
 /* ---------- Request helper ---------- */
 
-async function request<T>(path: string, init: RequestInit & { token?: string | null; json?: unknown } = {}): Promise<T> {
+export async function request<T>(path: string, init: RequestInit & { token?: string | null; json?: unknown } = {}): Promise<T> {
   const { token, json, ...rest } = init;
   const headers = new Headers(rest.headers);
   if (token) headers.set("Authorization", `Bearer ${token}`);
@@ -279,6 +279,9 @@ const MESSAGES: Record<string, string> = {
   DOCUMENT_NOT_READY: "This document is still being prepared.",
   PROVIDER_UNAVAILABLE: "A service we depend on is unavailable. Please try again shortly.",
   INTERNAL_ERROR: "Something went wrong on our side. Please try again.",
+  DONATION_AMOUNT_OUT_OF_RANGE: "Please choose an amount within the allowed range.",
+  DONATION_AMOUNT_INVALID: "Please enter the amount in whole rupees.",
+  DONATION_NOT_FOUND: "We couldn't find this donation. If money was deducted, please contact the committee.",
 };
 
 export function friendlyError(err: unknown): string {

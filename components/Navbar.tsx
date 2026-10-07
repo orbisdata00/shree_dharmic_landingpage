@@ -38,7 +38,7 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
     document.body.style.overflow = open ? "hidden" : "";
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const mq = window.matchMedia("(min-width: 1361px)");
+    const mq = window.matchMedia("(min-width: 1421px)");
     const onMq = (e: MediaQueryListEvent) => e.matches && setOpen(false);
     document.addEventListener("keydown", onKey);
     mq.addEventListener("change", onMq);
@@ -68,12 +68,16 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
               </Link>
             );
           })}
+          <Link href="/donate" className="btn btn--primary nav__cta-mobile" onClick={close}>Donate</Link>
           {MEMBERSHIP_OPEN && (
-            <Link href="/membership" className="btn btn--primary nav__cta-mobile" onClick={close}>Apply Membership</Link>
+            <Link href="/membership" className="btn btn--outline nav__cta-mobile" onClick={close}>Apply Membership</Link>
           )}
         </nav>
 
-        {MEMBERSHIP_OPEN && <Link href="/membership" className="btn btn--primary btn--sm nav__cta">Apply Membership</Link>}
+        <div className="nav__cta">
+          <Link href="/donate" className="btn btn--primary btn--sm">Donate</Link>
+          {MEMBERSHIP_OPEN && <Link href="/membership" className="btn btn--outline btn--sm">Apply Membership</Link>}
+        </div>
 
         <button
           className="nav__toggle"
