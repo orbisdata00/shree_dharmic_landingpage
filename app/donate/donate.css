@@ -1,0 +1,83 @@
+/* Donation page (/donate). Status boxes, spinner, badges and .form-error come from membership.css. */
+
+.donate { padding: clamp(40px, 6vw, 72px) 0 var(--section-y); background: var(--brand-ivory); }
+.donate__grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+
+.donate-eyebrow { font-size: .74rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--orange-deep); }
+.donate-eyebrow--light { color: var(--gold-pale); }
+
+/* ---------- Amount card ---------- */
+.donate-card {
+  display: grid; gap: 18px; padding: clamp(24px, 4vw, 44px);
+  background: linear-gradient(180deg, #FFFDF8, var(--ivory-deep)); border: 1px solid var(--gold-soft);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.donate-card h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--brand-red); line-height: 1.2; margin-top: -8px; }
+
+.donate-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.donate-presets button {
+  cursor: pointer; font: inherit; font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+  padding: 18px 8px; border-radius: var(--radius-sm); border: 1px solid var(--gold-soft); background: #fff; color: var(--brand-red);
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.donate-presets button:hover:not(:disabled) { border-color: var(--brand-gold); background: var(--ivory-deep); }
+.donate-presets button.is-active { background: var(--brand-red); border-color: var(--brand-red); color: var(--brand-ivory); }
+.donate-presets button:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 2px; }
+.donate-presets button:disabled { opacity: .6; cursor: not-allowed; }
+
+.donate-label { margin-top: 4px; font-size: .74rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--orange-deep); }
+.donate-input {
+  display: flex; align-items: center; gap: 10px; padding: 0 16px; margin-top: -8px;
+  background: #fff; border: 1.5px solid var(--gold-soft); border-radius: var(--radius-sm);
+  transition: border-color .2s, box-shadow .2s;
+}
+.donate-input span { font-size: 1.1rem; color: var(--text-soft); }
+.donate-input input { flex: 1; min-width: 0; padding: 15px 0; border: 0; background: transparent; font: inherit; font-size: 1.05rem; color: var(--text); }
+.donate-input input:focus { outline: none; }
+.donate-input:focus-within { border-color: var(--brand-orange); box-shadow: 0 0 0 4px rgba(242, 106, 33, .16); }
+.donate-input.has-error { border-color: #A8321C; background: #FFF8F5; }
+.donate-fine { font-size: .82rem; color: var(--text-soft); margin-top: -8px; }
+.donate-error-text { font-size: .82rem; font-weight: 500; color: #B42318; margin-top: -8px; }
+
+.donate-total {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 18px; border-top: 1px solid var(--line);
+}
+.donate-total span { font-size: .74rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--text-soft); }
+.donate-total strong { font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.3rem); color: var(--brand-red); overflow-wrap: anywhere; text-align: right; }
+
+.donate-submit { width: 100%; }
+.donate-methods { font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-text); text-align: center; }
+
+/* ---------- Thank-you ---------- */
+.donate-done { justify-items: center; text-align: center; }
+.donate-done__seal {
+  width: 84px; height: 84px; display: grid; place-items: center; border-radius: 50%;
+  background: radial-gradient(circle, #FFF9EE, var(--gold-pale) 60%, var(--gold-soft)); box-shadow: 0 0 0 10px rgba(233, 207, 142, .35);
+}
+.donate-done p { color: var(--text-soft); }
+.donate-done__ref { display: grid; gap: 8px; width: 100%; margin: 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; }
+.donate-done__ref div { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.donate-done__ref dt { font-size: .86rem; color: var(--text-soft); }
+.donate-done__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.donate-done__ref dd { margin: 0; font-weight: 600; color: var(--brand-red); overflow-wrap: anywhere; }
+
+/* ---------- Side panel ---------- */
+.donate-side {
+  display: grid; gap: 18px; padding: clamp(24px, 4vw, 44px); border-radius: var(--radius);
+  background: linear-gradient(160deg, var(--brand-maroon), #3E0B0B); color: rgba(255, 249, 238, .88);
+  border: 1px solid rgba(201, 154, 46, .5); box-shadow: var(--shadow-lg);
+}
+.donate-side h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); color: var(--brand-ivory); line-height: 1.25; margin-top: -8px; }
+.donate-side ul { display: grid; gap: 16px; }
+.donate-side li { display: grid; gap: 2px; padding-left: 16px; border-left: 2px solid var(--brand-gold); }
+.donate-side li strong { color: var(--gold-pale); font-weight: 600; }
+.donate-side li span { font-size: .92rem; }
+.donate-side__line { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold-pale); }
+.donate-side__trust { font-size: .74rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--brand-gold); }
+
+@media (max-width: 880px) {
+  .donate__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .donate-presets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

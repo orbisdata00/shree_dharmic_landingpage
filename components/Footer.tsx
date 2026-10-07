@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer__border" aria-hidden="true"></div>
       <div className="container footer__grid">
         <div className="footer__brand">
-          <a href="/#home" className="brand brand--light" aria-label={`${BRAND.name} - home`}>
+          <a href="/" className="brand brand--light" aria-label={`${BRAND.name} - home`}>
             <img className="footer__logo" src={BRAND.logo} alt="" width={96} height={96} loading="lazy" />
             <span className="brand__text">{BRAND.short}<small>Committee {BRAND.place}</small></span>
           </a>
@@ -19,9 +19,10 @@ export default function Footer() {
 
         <nav className="footer__links" aria-label="Footer">
           <h4>Explore</h4>
-          {LINKS.map((l) => <a key={l} href={`/#${l.toLowerCase()}`}>{l}</a>)}
+          {LINKS.map((l) => <a key={l} href={l === "Home" ? "/" : `/${l.toLowerCase()}`}>{l}</a>)}
           <a href="/bhumi-poojan">Bhumi Poojan</a>
           <a href="/blog">Blog</a>
+          <a href="/donate">Donate</a>
           {MEMBERSHIP_OPEN && <a href="/membership">Membership</a>}
         </nav>
 
@@ -33,7 +34,6 @@ export default function Footer() {
             <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4" /><path d="M10 9l5 3-5 3z" className="fill" /></svg></a>
             <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z" /><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1.1-.5-2-1.4-2.4-2.4l.9-1-1-2z" className="fill" /></svg></a>
           </div>
-          <p className="footer__note">Satsang every Sunday · All are welcome</p>
         </div>
       </div>
       <div className="container footer__bottom">

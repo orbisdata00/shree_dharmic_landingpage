@@ -13,7 +13,7 @@ export default function Community() {
           <h2 className="h2">Be Part of the <em>Parampara</em></h2>
           <p>Every Leela is made possible by seva. Lend your hands on stage, backstage or among the audience - or become a member and help carry this tradition to the next generation.</p>
           <div className="community__actions">
-            <a href="#contact" className="btn btn--primary">Volunteer With Us</a>
+            <a href="/contact" className="btn btn--primary">Volunteer With Us</a>
             {MEMBERSHIP_OPEN && <a href="/membership" className="btn btn--glass">Become a Member</a>}
           </div>
         </div>

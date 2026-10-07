@@ -8,7 +8,7 @@ type RazorpayOptions = {
   currency: string;
   name: string;
   description: string;
-  prefill?: PaymentOrder["prefill"];
+  prefill?: Partial<PaymentOrder["prefill"]>;
   notes?: Record<string, string>;
   theme?: { color?: string };
   handler: (resp: CheckoutResponse) => void;
@@ -39,6 +39,10 @@ export function loadCheckout(): Promise<RazorpayConstructor> {
   return loading;
 }
 
+/** The fields Checkout needs from a backend-created order (membership or donation). */
+export type CheckoutOrder = Pick<PaymentOrder, "key_id" | "order_id" | "amount" | "currency" | "name" | "description" | "notes"> &
+  { prefill?: Partial<PaymentOrder["prefill"]> };
+
 export type CheckoutOutcome =
   | { kind: "completed"; response: CheckoutResponse }
   | { kind: "failed"; message: string }
@@ -47,9 +51,9 @@ export type CheckoutOutcome =
 /**
  * Opens Checkout for a backend-created order and resolves once the visitor pays, a payment
  * attempt fails, or the window is closed. The caller must still confirm with the backend:
- * the Checkout handler alone never means the membership is active.
+ * the Checkout handler alone never means the payment is settled.
  */
-export async function openCheckout(order: PaymentOrder): Promise<CheckoutOutcome> {
+export async function openCheckout(order: CheckoutOrder): Promise<CheckoutOutcome> {
   const Razorpay = await loadCheckout();
   return new Promise((resolve) => {
     let failure: string | null = null;

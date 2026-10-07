@@ -3,7 +3,7 @@ import HeroParticles from "./HeroParticles";
 import { Mandala, delay } from "./ui";
 import { BRAND } from "@/lib/brand";
 
-const HERO_IMAGE = "/assets/img/hero.jpg";
+const HERO_IMAGE = "/assets/img/leela-ram.jpg";
 
 export default function Hero() {
   preload(HERO_IMAGE, { as: "image", fetchPriority: "high" });
@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero__media" data-parallax="0.25">
-        <img src={HERO_IMAGE} alt="Priests performing the evening Ganga Aarti in Varanasi, bathed in golden lamplight and incense smoke" fetchPriority="high" />
+        <img src={HERO_IMAGE} alt="Ramleela on stage: Shri Ram and Lakshman ji in royal costume with bow and arrows" fetchPriority="high" />
       </div>
       <div className="hero__overlay"></div>
       <HeroParticles />
@@ -26,8 +26,8 @@ export default function Hero() {
         </h1>
         <p className="hero__text fade-up" style={delay(".7s")}>For over a century, the {BRAND.name} has kept the sacred tradition of Leela alive - in dharma, devotion, maryada, truth and community.</p>
         <div className="hero__actions fade-up" style={delay(".95s")}>
-          <a href="#leela" className="btn btn--primary">Explore the Leela</a>
-          <a href="#events" className="btn btn--glass">Upcoming Events</a>
+          <a href="/leela" className="btn btn--primary">Explore the Leela</a>
+          <a href="/events" className="btn btn--glass">Upcoming Events</a>
         </div>
       </div>
 

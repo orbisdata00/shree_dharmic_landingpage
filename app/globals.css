@@ -173,7 +173,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   background: linear-gradient(90deg, transparent, var(--brand-gold) 20%, var(--gold-pale) 50%, var(--brand-gold) 80%, transparent);
   opacity: 0; transition: opacity .45s;
 }
-.nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1480px; } /* wider than .container: ten links + two CTAs */
 .nav .brand__text { color: #fff; transition: color .4s; }
 .nav .brand__text small { color: var(--gold-pale); transition: color .4s; }
 
@@ -188,7 +188,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .nav__links a:not(.btn):hover, .nav__links a.is-active { color: #fff; }
 .nav__links a:not(.btn):hover::after, .nav__links a.is-active::after { transform: translateX(-50%) scale(1); }
-.nav__cta { flex-shrink: 0; }
+.nav__cta { flex-shrink: 0; display: flex; gap: 8px; }
 .nav__cta-mobile { display: none; }
 
 .nav.is-scrolled {
@@ -224,7 +224,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .hero__media { position: absolute; inset: -6% 0; z-index: -3; will-change: transform; }
 .hero__media img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center 35%;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
   animation: heroZoom 26s var(--ease) both;
 }
 @keyframes heroZoom { from { transform: scale(1.18); } to { transform: scale(1.02); } }
@@ -713,7 +713,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 .socials svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
 .socials .fill { fill: currentColor; stroke: none; }
 .socials a:hover { background: var(--brand-orange); border-color: var(--brand-orange); color: #fff; transform: translateY(-4px); }
-.footer__note { margin-top: 22px; font-size: .88rem; }
 .footer__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-block: 26px 30px; border-top: 1px solid rgba(201, 154, 46, .15); font-size: .84rem; }
 .footer__credits { color: rgba(255, 241, 222, .5); }
 .footer__credits a { text-decoration: underline; text-underline-offset: 3px; }
@@ -728,9 +727,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   .value:nth-child(4) { grid-column: 2 / span 2; }
 }
 
-/* Mobile nav: ten links + CTA need the full desktop width, so the menu collapses early.
+/* Mobile nav: ten links + two CTAs need the full desktop width, so the menu collapses early.
    Keep in sync with the matchMedia query in components/Navbar.tsx. */
-@media (max-width: 1360px) {
+@media (max-width: 1420px) {
   .nav__toggle { display: flex; }
   .nav__cta { display: none; }
   .nav__links {
@@ -749,7 +748,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   }
   .nav__links a:not(.btn)::after { bottom: 50%; left: -8px; transform: translateY(50%) scale(0); }
   .nav__links a.is-active::after { transform: translateY(50%) scale(1); }
-  .nav__cta-mobile { display: inline-flex; margin-top: 18px; opacity: 0; transition: opacity .5s var(--ease) .35s; }
+  .nav__cta-mobile { display: inline-flex; margin-top: 12px; opacity: 0; transition: opacity .5s var(--ease) .35s; }
   /* Auto margins centre the links but, unlike justify-content: center, keep the top ones reachable when the list scrolls. */
   .nav__links > :first-child { margin-top: auto; }
   .nav__links > :last-child { margin-bottom: auto; }
@@ -846,3 +845,15 @@ ul { list-style: none; margin: 0; padding: 0; }
   .reveal, .fade-up { opacity: 1; transform: none; }
   .hero__particles { display: none; }
 }
+
+/* ---------- Standalone menu pages (components/SubPage.tsx) ---------- */
+.page-hero { position: relative; overflow: hidden; isolation: isolate; padding: 170px 0 110px; color: #fff; }
+.page-hero__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+.page-hero__overlay {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, rgba(64, 12, 12, .9) 0%, rgba(110, 22, 22, .7) 50%, rgba(242, 106, 33, .3) 100%);
+}
+.page-hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); color: var(--brand-ivory); line-height: 1.12; max-width: 22ch; overflow-wrap: anywhere; }
+.page-hero h1 span { color: var(--gold-pale); }
+.page-hero .container > p:last-child { margin-top: 18px; max-width: 60ch; font-size: 1.08rem; font-weight: 300; color: rgba(255, 249, 238, .9); }
+@media (max-width: 720px) { .page-hero { padding: 130px 0 80px; } }

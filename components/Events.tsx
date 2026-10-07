@@ -49,7 +49,7 @@ export default function Events() {
                 </p>
                 <h3>{ev.title}</h3>
                 <p>{ev.text}</p>
-                <a href="#contact" className="e-card__link">View Details <span className="arrow">→</span></a>
+                <a href="/contact" className="e-card__link">View Details <span className="arrow">→</span></a>
               </div>
             </article>
           ))}
