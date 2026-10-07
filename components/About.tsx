@@ -52,7 +52,7 @@ export default function About() {
             ))}
           </ul>
 
-          <a href="#committee" className="btn btn--outline reveal">Our Heritage <span className="arrow">→</span></a>
+          <a href="/committee" className="btn btn--outline reveal">Our Heritage <span className="arrow">→</span></a>
         </div>
       </div>
     </section>

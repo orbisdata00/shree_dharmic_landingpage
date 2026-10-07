@@ -5,25 +5,24 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BRAND, MEMBERSHIP_OPEN } from "@/lib/brand";
 
-// Section links scroll to an id on the home page; `page` links go to their own route.
-const LINKS: { id: string; label: string; page?: string }[] = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "leela", label: "Leela" },
-  { id: "events", label: "Events" },
-  { id: "bhumi-poojan", label: "Bhumi Poojan", page: "/bhumi-poojan" },
-  { id: "committee", label: "Committee" },
-  { id: "updates", label: "Updates" },
-  { id: "blog", label: "Blog", page: "/blog" },
-  { id: "volunteer", label: "Volunteer" },
-  { id: "contact", label: "Contact" },
+// Every menu item opens its own page.
+const LINKS: { href: string; label: string }[] = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/leela", label: "Leela" },
+  { href: "/events", label: "Events" },
+  { href: "/bhumi-poojan", label: "Bhumi Poojan" },
+  { href: "/committee", label: "Committee" },
+  { href: "/updates", label: "Updates" },
+  { href: "/blog", label: "Blog" },
+  { href: "/volunteer", label: "Volunteer" },
+  { href: "/contact", label: "Contact" },
 ];
 
 /** `solid`: always use the light, scrolled style (for pages without a dark hero). */
 export default function Navbar({ solid = false }: { solid?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(solid ? "" : "home");
   const pathname = usePathname();
 
   // Solid background once the page scrolls
@@ -49,43 +48,26 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
     };
   }, [open]);
 
-  // Active link highlighting
-  useEffect(() => {
-    const spy = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id)),
-      { rootMargin: "-45% 0px -50% 0px" }
-    );
-    LINKS.forEach(({ id, page }) => {
-      if (page) return;
-      const el = document.getElementById(id);
-      if (el) spy.observe(el);
-    });
-    return () => spy.disconnect();
-  }, []);
-
   const close = () => setOpen(false);
   const cls = ["nav", (scrolled || solid) && "is-scrolled", open && "is-open"].filter(Boolean).join(" ");
 
   return (
     <header className={cls} id="nav">
       <div className="nav__inner container">
-        <a href="/#home" className="brand" aria-label={`${BRAND.name} - home`}>
+        <Link href="/" className="brand" aria-label={`${BRAND.name} - home`}>
           <img className="brand__logo" src={BRAND.logo} alt="" width={52} height={52} />
           <span className="brand__text">{BRAND.short}<small>Committee</small></span>
-        </a>
+        </Link>
 
         <nav className="nav__links" id="navLinks" aria-label="Primary">
-          {LINKS.map(({ id, label, page }) =>
-            page ? (
-              <Link key={id} href={page} className={pathname.startsWith(page) ? "is-active" : undefined} onClick={close}>
+          {LINKS.map(({ href, label }) => {
+            const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+            return (
+              <Link key={href} href={href} className={isActive ? "is-active" : undefined} aria-current={isActive ? "page" : undefined} onClick={close}>
                 {label}
               </Link>
-            ) : (
-              <a key={id} href={`/#${id}`} className={active === id ? "is-active" : undefined} onClick={close}>
-                {label}
-              </a>
-            ),
-          )}
+            );
+          })}
           {MEMBERSHIP_OPEN && (
             <Link href="/membership" className="btn btn--primary nav__cta-mobile" onClick={close}>Apply Membership</Link>
           )}

@@ -48,7 +48,7 @@ export default function LeelaCarousel() {
                 <span className="l-card__num">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{l.title}</h3>
                 <p>{l.text}</p>
-                <a href="#events" className="l-card__link">Explore Leela <span className="arrow">→</span></a>
+                <a href="/events" className="l-card__link">Explore Leela <span className="arrow">→</span></a>
               </div>
             </article>
           ))}

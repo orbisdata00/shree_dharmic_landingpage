@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer__border" aria-hidden="true"></div>
       <div className="container footer__grid">
         <div className="footer__brand">
-          <a href="/#home" className="brand brand--light" aria-label={`${BRAND.name} - home`}>
+          <a href="/" className="brand brand--light" aria-label={`${BRAND.name} - home`}>
             <img className="footer__logo" src={BRAND.logo} alt="" width={96} height={96} loading="lazy" />
             <span className="brand__text">{BRAND.short}<small>Committee {BRAND.place}</small></span>
           </a>
@@ -19,7 +19,7 @@ export default function Footer() {
 
         <nav className="footer__links" aria-label="Footer">
           <h4>Explore</h4>
-          {LINKS.map((l) => <a key={l} href={`/#${l.toLowerCase()}`}>{l}</a>)}
+          {LINKS.map((l) => <a key={l} href={l === "Home" ? "/" : `/${l.toLowerCase()}`}>{l}</a>)}
           <a href="/bhumi-poojan">Bhumi Poojan</a>
           <a href="/blog">Blog</a>
           {MEMBERSHIP_OPEN && <a href="/membership">Membership</a>}
