@@ -1,10 +1,10 @@
 /**
  * Brand copy from the committee's brand guidelines. The name follows the primary logo
- * ("Shri Dharmic Leela Committee (Regd.) Delhi").
+ * ("Shree Dharmic Leela Committee (Regd.) Delhi").
  */
 export const BRAND = {
-  name: "Shri Dharmic Leela Committee",
-  short: "Shri Dharmic Leela",
+  name: "Shree Dharmic Leela Committee",
+  short: "Shree Dharmic Leela",
   place: "(Regd.) Delhi",
   blessing: "With the blessings of Shri Lala Bansidhar Gupta Ji",
   line: "Tradition that brings generations together.",

@@ -2,14 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { friendlyError, type CheckoutResponse } from "@/lib/membershipApi";
-import { donationApi, receiptUrl, type Donation, type DonationSettings } from "@/lib/donationApi";
+import { donationApi, receiptUrl, type Donation } from "@/lib/donationApi";
 import { openCheckout } from "@/lib/razorpay";
 import { DiyaMark } from "./ui";
 
-/** Preset amounts in rupees, smallest first. Ones outside the backend's allowed range are hidden. */
+/** Preset amounts in rupees, smallest first. Any whole-rupee amount from ₹1 can be entered instead. */
 const PRESETS = [1101, 2101, 5101, 11001, 21001, 51001];
-// Shown until /donations/settings answers; the backend enforces its own range regardless.
-const FALLBACK_RANGE: DonationSettings = { min_amount_paise: 10_000, max_amount_paise: 50_000_000, currency: "INR" };
 
 const POLL_MS = 4000;
 const POLL_LIMIT_MS = 120_000;
@@ -29,7 +27,6 @@ const rupees = (n: number) =>
   new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
 
 export default function DonateForm() {
-  const [range, setRange] = useState(FALLBACK_RANGE);
   const [preset, setPreset] = useState<number | null>(PRESETS[0]);
   const [custom, setCustom] = useState("");
   const [name, setName] = useState("");
@@ -41,17 +38,10 @@ export default function DonateForm() {
 
   useEffect(() => {
     mounted.current = true;
-    donationApi.settings().then((s) => mounted.current && setRange(s)).catch(() => { /* keep the fallback */ });
     return () => { mounted.current = false; window.clearTimeout(pollTimer.current); };
   }, []);
 
-  const min = range.min_amount_paise / 100;
-  const max = range.max_amount_paise / 100;
-  const presets = PRESETS.filter((p) => p >= min && p <= max);
   const amount = custom ? Number(custom) : preset ?? 0;
-  const amountError = custom && (amount < min || amount > max)
-    ? `Please enter an amount between ${rupees(min)} and ${rupees(max)}.`
-    : null;
   const trimmedName = name.trim().replace(/\s+/g, " ");
   const nameError = trimmedName.length < 2 || !/\p{L}/u.test(trimmedName) ? "Please enter your full name for the receipt." : null;
   const busy = ["creating", "checkout", "verifying", "pending"].includes(phase.kind);
@@ -88,7 +78,7 @@ export default function DonateForm() {
 
   const donate = async () => {
     setNameTouched(true);
-    if (!amount || amountError || nameError || busy) return;
+    if (!amount || nameError || busy) return;
     setPhase({ kind: "creating" });
     let order;
     try {
@@ -156,7 +146,7 @@ export default function DonateForm() {
       <h2>Choose an Amount</h2>
 
       <div className="donate-presets" role="radiogroup" aria-label="Donation amount">
-        {presets.map((p) => {
+        {PRESETS.map((p) => {
           const on = !custom && preset === p;
           return (
             <button key={p} type="button" role="radio" aria-checked={on} className={on ? "is-active" : undefined}
@@ -168,15 +158,12 @@ export default function DonateForm() {
       </div>
 
       <label className="donate-label" htmlFor="donate-amount">Or enter your own amount</label>
-      <div className={`donate-input${amountError ? " has-error" : ""}`}>
+      <div className="donate-input">
         <span aria-hidden="true">₹</span>
         <input id="donate-amount" inputMode="numeric" autoComplete="off" placeholder="Enter amount" value={custom}
-          disabled={busy} aria-invalid={!!amountError} aria-describedby="donate-amount-hint"
-          onChange={(e) => setCustom(e.target.value.replace(/\D/g, "").replace(/^0+/, "").slice(0, 9))} />
+          disabled={busy}
+          onChange={(e) => setCustom(e.target.value.replace(/\D/g, "").replace(/^0+/, "").slice(0, 8))} />
       </div>
-      <p id="donate-amount-hint" className={amountError ? "donate-error-text" : "donate-fine"}>
-        {amountError ?? `Minimum ${rupees(min)}, maximum ${rupees(max)}.`}
-      </p>
 
       <label className="donate-label" htmlFor="donate-name">Your name (for the receipt)</label>
       <div className={`donate-input${nameTouched && nameError ? " has-error" : ""}`}>
@@ -214,7 +201,7 @@ export default function DonateForm() {
         </div>
       )}
 
-      <button type="submit" className="btn btn--primary donate-submit" disabled={busy || !amount || !!amountError || phase.kind === "slow"}>
+      <button type="submit" className="btn btn--primary donate-submit" disabled={busy || !amount || phase.kind === "slow"}>
         {phase.kind === "creating" ? <><span className="spinner spinner--light" /> Preparing…</>
           : phase.kind === "checkout" ? <><span className="spinner spinner--light" /> Waiting for payment…</>
           : <>Continue to Donate <span className="arrow">→</span></>}

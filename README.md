@@ -1,6 +1,6 @@
-# Shri Dharmic Leela Committee - Website
+# Shree Dharmic Leela Committee - Website
 
-The website of the **Shri Dharmic Leela Committee (Regd.) Delhi**, which celebrates the tradition of Leela and the values of dharma, devotion, maryada, truth and community. It follows the committee's brand guidelines: an ivory-first design with deep-red headings, orange buttons and restrained gold accents, Cinzel and Inter typefaces, and the committee's primary and heritage logos.
+The website of the **Shree Dharmic Leela Committee (Regd.) Delhi**, which celebrates the tradition of Leela and the values of dharma, devotion, maryada, truth and community. It follows the committee's brand guidelines: an ivory-first design with deep-red headings, orange buttons and restrained gold accents, Cinzel and Inter typefaces, and the committee's primary and heritage logos.
 
 Built with **Next.js 16** (App Router), **React 19** and **TypeScript**.
 
@@ -106,4 +106,4 @@ All photographs are from [Wikimedia Commons](https://commons.wikimedia.org) and 
 
 ## Licence
 
-© 2026 Shri Dharmic Leela Committee (Regd.) Delhi. All rights reserved. The photographs remain under their individual licences listed in `public/CREDITS.md`.
+© 2026 Shree Dharmic Leela Committee (Regd.) Delhi. All rights reserved. The photographs remain under their individual licences listed in `public/CREDITS.md`.
