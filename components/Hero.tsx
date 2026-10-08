@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero__media" data-parallax="0.25">
-        <img src={HERO_IMAGE} alt="Ramleela on stage: Shri Ram and Lakshman ji in royal costume with bow and arrows" fetchPriority="high" />
+        <img src={HERO_IMAGE} alt="Ramleela on stage: Shree Ram and Lakshman ji in royal costume with bow and arrows" fetchPriority="high" />
       </div>
       <div className="hero__overlay"></div>
       <HeroParticles />
