@@ -6,7 +6,7 @@ export const BRAND = {
   name: "Shree Dharmic Leela Committee",
   short: "Shree Dharmic Leela",
   place: "(Regd.) Delhi",
-  blessing: "With the blessings of Shri Lala Bansidhar Gupta Ji",
+  blessing: "With the blessings of Shree Lala Bansidhar Gupta Ji",
   line: "Tradition that brings generations together.",
   logo: "/assets/brand/logo-primary.webp",
   heritageLogo: "/assets/brand/logo-heritage.webp",

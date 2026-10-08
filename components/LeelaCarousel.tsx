@@ -3,8 +3,8 @@
 import { useSnapCarousel } from "./useSnapCarousel";
 
 const LEELAS = [
-  { title: "Krishna Leela", img: "leela-krishna.jpg", alt: "Manipuri Rasa Lila dancers portraying Krishna and the gopis", text: "The playful, loving pastimes of Shri Krishna - from Vrindavan’s Raas to the wisdom of the Gita." },
-  { title: "Ram Leela", img: "leela-ram.jpg", alt: "Ramlila performers in royal costume on a painted stage", text: "The journey of Maryada Purushottam Shri Ram - dharma, duty and devotion brought alive on stage." },
+  { title: "Krishna Leela", img: "leela-krishna.jpg", alt: "Manipuri Rasa Lila dancers portraying Krishna and the gopis", text: "The playful, loving pastimes of Shree Krishna - from Vrindavan’s Raas to the wisdom of the Gita." },
+  { title: "Ram Leela", img: "leela-ram.jpg", alt: "Ramlila performers in royal costume on a painted stage", text: "The journey of Maryada Purushottam Shree Ram - dharma, duty and devotion brought alive on stage." },
   { title: "Shiv Leela", img: "leela-shiv.jpg", alt: "Chola-era bronze sculpture of Shiva as Nataraja, the cosmic dancer", text: "The cosmic dance of Mahadev - creation, preservation and dissolution in a single divine rhythm." },
   { title: "Divine Stories", img: "leela-stories.jpg", alt: "Two Kathakali artists performing a dramatic epic scene", text: "Epics and Puranic tales retold through classical theatre, katha and expressive performance." },
   { title: "Bhakti & Celebration", img: "leela-bhakti.jpg", alt: "A golden, ornately decorated pandal with the idol of Maa Durga", text: "Festivals of light, colour and song where the whole community gathers in devotion." },
