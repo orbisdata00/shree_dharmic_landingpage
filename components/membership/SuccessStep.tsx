@@ -71,7 +71,7 @@ export default function SuccessStep({ registration, token, onSignOut, onAuthErro
       </div>
       <p className="success__eyebrow">॥ स्वागतम् ॥</p>
       <h2>Welcome to the family, {firstName}!</h2>
-      <p className="success__lead">Your membership of the Shri Dharmic Leela Committee is active. Thank you for being part of the journey.</p>
+      <p className="success__lead">Your membership of the Shree Dharmic Leela Committee is active. Thank you for being part of the journey.</p>
 
       <div className="member-card">
         <div>
