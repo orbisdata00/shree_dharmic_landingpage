@@ -1,0 +1,8 @@
+/* /pay: one centred card, built from the donate page's card and input styles. */
+.pay__wrap { max-width: 600px; }
+.pay-for { display: grid; gap: 4px; padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; }
+.pay-for span { font-size: .74rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--text-soft); }
+.pay-for strong { font-weight: 600; color: var(--text); overflow-wrap: anywhere; }
+.pay-hint { font-size: .82rem; color: var(--text-soft); margin-top: -8px; }
+.pay-ended { justify-items: center; text-align: center; }
+.pay-ended p { color: var(--text-soft); }

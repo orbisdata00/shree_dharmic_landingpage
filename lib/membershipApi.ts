@@ -282,6 +282,12 @@ const MESSAGES: Record<string, string> = {
   DONATION_AMOUNT_OUT_OF_RANGE: "Please choose an amount within the allowed range.",
   DONATION_AMOUNT_INVALID: "Please enter the amount in whole rupees.",
   DONATION_NOT_FOUND: "We couldn't find this donation. If money was deducted, please contact the committee.",
+  PAYMENT_LINK_NOT_FOUND: "This payment link isn't valid. Please check the link you were sent.",
+  PAYMENT_LINK_NOT_PAYABLE: "This payment link can no longer be used.",
+  PAYMENT_LINK_FIXED_AMOUNT: "This link is for a fixed amount.",
+  PAYMENT_LINK_AMOUNT_INVALID: "Please enter the amount in whole rupees.",
+  PAYMENT_LINK_AMOUNT_OUT_OF_RANGE: "Please enter an amount within the allowed range.",
+  PAYMENT_LINK_MISMATCH: "This payment belongs to a different link.",
 };
 
 export function friendlyError(err: unknown): string {
