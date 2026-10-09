@@ -38,7 +38,7 @@ export default function BlogList({ posts }: { posts: PostSummary[] }) {
       </nav>
 
       {items.length === 0 ? (
-        <p className="blog-empty">No posts yet — check back soon.</p>
+        <p className="blog-empty">No posts yet - check back soon.</p>
       ) : (
         <ul className="blog-grid">
           {items.map((p) => (
